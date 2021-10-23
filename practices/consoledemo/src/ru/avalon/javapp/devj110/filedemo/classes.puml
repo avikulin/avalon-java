@@ -1,0 +1,50 @@
+@startuml
+class AbstractFile
+class DimensionsStore
+class DocumentFile
+class ImageFile
+class MultimediaFile
+class VideoFile
+enum FileFormats
+
+DocumentFile --|> AbstractFile
+ImageFile --|> AbstractFile
+MultimediaFile --|> AbstractFile
+VideoFile --|> MultimediaFile
+
+ImageFile --> DimensionsStore
+VideoFile --> DimensionsStore
+AbstractFile --> FileFormats
+
+DimensionsStore : -int width
+DimensionsStore : -int height
+DimensionsStore : +String toString()
+DimensionsStore : +get...()
+DimensionsStore : +set...()
+
+AbstractFile : -String filename
+AbstractFile : -int sizeInBytes
+AbstractFile : -FileFormats formatId
+AbstractFile : +abstract void printItem()
+AbstractFile : +static void printCollection(AbstractFile[] files)
+AbstractFile : +get...()
+AbstractFile : +set...()
+
+DocumentFile : - int numberOfPages
+DocumentFile : +get...()
+DocumentFile : +set...()
+
+ImageFile : -DimensionsStore imageDimensions
+ImageFile : +get...()
+ImageFile : +set...()
+
+MultimediaFile : -String contentDescription
+MultimediaFile : -int durationInSeconds;
+MultimediaFile : +get...()
+MultimediaFile : +set...()
+
+VideoFile : -DimensionsStore thumbPicDimension
+VideoFile : +get...()
+VideoFile : +set...()
+
+@enduml
