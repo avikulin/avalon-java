@@ -62,8 +62,8 @@ public class Book {
     }
 
     public void setAuthors(String[] authors) {
-        if ((authors == null) || (authors.length == 0)) {
-            throw new IllegalArgumentException("Authors must be set to non-empty array of strings");
+        if (authors == null) {
+            throw new IllegalArgumentException("Authors must be not null");
         }
 
         for (String author : authors) {
@@ -81,6 +81,17 @@ public class Book {
 
     public int getNumberOfAuthors() {
         return (authors != null) ? authors.length : 0;
+    }
+
+    public String getAuthorByIdx(int idx) {
+        if (authors.length == 0) {
+            return "";
+        }
+
+        if ((idx < 0) || (idx >= authors.length)) {
+            throw new IllegalArgumentException("Index must not be less 0, and must not exceed the array length");
+        }
+        return authors[idx];
     }
 
     public String getAuthorsStr() {
