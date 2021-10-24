@@ -1,50 +1,77 @@
 @startuml
-class AbstractFile
-class DimensionsStore
-class DocumentFile
-class ImageFile
-class MultimediaFile
-class VideoFile
-enum FileFormats
 
-DocumentFile --|> AbstractFile
-ImageFile --|> AbstractFile
-MultimediaFile --|> AbstractFile
-VideoFile --|> MultimediaFile
+enum FileFormats{
+    DOCX
+    MP3
+    PNG
+    AVI
 
-ImageFile --> DimensionsStore
-VideoFile --> DimensionsStore
++getContentType():String
+}
+
+
+class DimensionsStore {
+-width:int
+-height:int
++toString():String
++get...()
++set...()
+}
+
+class DurationStore{
+-hours : int
+-minutes : int
+-seconds : int
++toString() : String
+}
+
+class AbstractFile {
+ -filename : String
+ -sizeInBytes : int
+ -formatId : FileFormats
+ +abstract void printItem()
+ +static void printCollection(AbstractFile[] files)
+ +get...()
+ +set...()
+}
+
+class DocumentFile{
+-numberOfPages: int
++get...()
++set...()
+}
+
+class ImageFile{
+ -imageDimensions: DimensionsStore
++get...()
++set...()
+}
+
+class MultimediaFile{
+-contentDescription: String
+-duration: DurationStore;
++get...()
++set...()
+}
+
+class VideoFile{
+-thumbPicDimension: DimensionsStore
++get...()
++set...()
+}
+
 AbstractFile --> FileFormats
 
-DimensionsStore : -int width
-DimensionsStore : -int height
-DimensionsStore : +String toString()
-DimensionsStore : +get...()
-DimensionsStore : +set...()
+DocumentFile --|> AbstractFile
 
-AbstractFile : -String filename
-AbstractFile : -int sizeInBytes
-AbstractFile : -FileFormats formatId
-AbstractFile : +abstract void printItem()
-AbstractFile : +static void printCollection(AbstractFile[] files)
-AbstractFile : +get...()
-AbstractFile : +set...()
+ImageFile --|> AbstractFile
+ImageFile --> DimensionsStore
 
-DocumentFile : - int numberOfPages
-DocumentFile : +get...()
-DocumentFile : +set...()
+MultimediaFile --|> AbstractFile
+MultimediaFile --> DurationStore
 
-ImageFile : -DimensionsStore imageDimensions
-ImageFile : +get...()
-ImageFile : +set...()
+VideoFile --|> MultimediaFile
+VideoFile --> DimensionsStore
 
-MultimediaFile : -String contentDescription
-MultimediaFile : -int durationInSeconds;
-MultimediaFile : +get...()
-MultimediaFile : +set...()
-
-VideoFile : -DimensionsStore thumbPicDimension
-VideoFile : +get...()
-VideoFile : +set...()
 
 @enduml
