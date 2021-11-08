@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+enum JustificationTypes {
+    LEFT_TO_RIGHT,
+    RIGHT_TO_LEFT,
+    CENTER
+}
+
+interface Dumpable
+interface Serializable
+interface SearchResultsContainer<T>
+interface Capturable<T>
+interface LinearDataSegment<T>
+interface LinearDataSegmentsRepository<T>
+interface Iterable<T>
+
+
+LinearDataSegmentsRepository ..>Iterable
+
+class RepositorySearchResult<T> implements SearchResultsContainer, Iterable, Serializable
+class SegmentSearchResult<T> implements SearchResultsContainer, Iterable, Serializable
+class ListDataToken<T> implements LinearDataSegment, Iterable, Dumpable, Serializable
+class ListRepository<T> implements LinearDataSegmentsRepository, Iterable, Capturable, Dumpable, Serializable
+
+ListDataToken ..> SearchResultsContainer
+ListRepository ..>SearchResultsContainer
+ListDataToken --> SegmentSearchResult
+ListRepository --> RepositorySearchResult
+ListDataToken --> JustificationTypes
+ListRepository --> JustificationTypes
+
+@enduml
