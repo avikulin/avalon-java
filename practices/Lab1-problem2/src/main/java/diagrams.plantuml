@@ -1,0 +1,22 @@
+@startuml
+interface Iterable<Book>
+interface Iterator<Book>
+
+entity Book
+entity Publisher
+class BooksRepo
+class PublisherDictRepo
+class BooksIterator
+class PrintHelper
+
+BooksRepo --|> Iterable
+BooksIterator --|>Iterator
+
+Publisher <--Book
+BooksRepo o--Book
+BooksRepo <--BooksIterator
+PublisherDictRepo o--Publisher
+PrintHelper..>Book
+PrintHelper..>BooksRepo
+
+@enduml
