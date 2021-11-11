@@ -1,0 +1,64 @@
+@startuml
+enum FileFormats {
+    DOCX
+    XLSX
+    PNG
+    JPG
+    MP3
+    ACC
+    AVI
+    MP4
+}
+
+enum FileType {
+    DOCUMENT
+    IMAGE
+    MULTIMEDIA
+    VIDEO
+}
+
+FileFormats-->FileType
+
+interface FileSystemObject
+
+interface Viewable
+
+interface FilesController
+
+interface Iterable<T>
+
+interface Repository<T>
+
+Repository --|>Iterable
+
+interface View
+
+abstract class AbstractFile implements FileSystemObject, Viewable
+AbstractFile-->FileFormats
+
+class DocumentFile extends AbstractFile
+
+class ImageFile extends AbstractFile
+ImageFile-->Dimensions
+
+class MultimediaFile extends AbstractFile
+MultimediaFile-->Duration
+
+class VideoFile extends MultimediaFile
+VideoFile-->Dimensions
+
+class Dimensions
+class Duration
+
+class FileRepository<T> implements Repository
+FileRepository o--FileSystemObject
+
+class ConsoleView implements View
+ConsoleView-->FileRepository
+
+class FileController implements FilesController
+FileController-->FileRepository
+FileController-->ConsoleView
+
+
+@enduml
