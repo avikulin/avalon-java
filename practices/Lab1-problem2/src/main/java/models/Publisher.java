@@ -13,7 +13,7 @@ public class Publisher {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws IllegalArgumentException {
         if ((name == null) || name.isEmpty()) {
             throw new IllegalArgumentException("Name must be set to non-blank value");
         }
@@ -24,9 +24,9 @@ public class Publisher {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(String location) throws IllegalArgumentException {
         if ((location == null) || location.isEmpty()) {
-            throw new NullPointerException("Location must be set to non-blank value");
+            throw new IllegalArgumentException("Location must be set to non-blank value");
         }
         this.location = location;
     }
@@ -36,4 +36,12 @@ public class Publisher {
         return String.format("%s, %s", name, location);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Publisher publisher = (Publisher) o;
+        return name.equals(publisher.name) &&
+                location.equals(publisher.location);
+    }
 }

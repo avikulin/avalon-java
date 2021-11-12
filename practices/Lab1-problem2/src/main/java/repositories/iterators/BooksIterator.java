@@ -6,19 +6,24 @@ import java.util.Iterator;
 
 public class BooksIterator implements Iterator<Book> {
     private final Book[] iterableStore;
+    private int fillFactor;
     private int iterationPointer;
 
-    public BooksIterator(Book[] bookStore) {
+    public BooksIterator(Book[] bookStore, int fillFactor) {
         if (bookStore == null) {
             throw new IllegalArgumentException("Reference to storage array must be not null");
         }
-        iterableStore = bookStore;
-        iterationPointer = 0;
+        if (fillFactor < 0) {
+            throw new IllegalArgumentException("Fill factor must be positive value");
+        }
+        this.iterableStore = bookStore;
+        this.iterationPointer = 0;
+        this.fillFactor = fillFactor;
     }
 
     @Override
     public boolean hasNext() {
-        return iterationPointer < iterableStore.length;
+        return iterationPointer < fillFactor;
     }
 
     @Override
