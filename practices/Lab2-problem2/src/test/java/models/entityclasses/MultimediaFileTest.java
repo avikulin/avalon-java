@@ -51,7 +51,7 @@ class MultimediaFileTest {
                                     "abc", new Duration(3665)));
         assertNotEquals(m, new MultimediaFile("2", FileFormats.MP3, 2,
                 "abc", new Duration(3665)));
-        assertNotEquals(m, new MultimediaFile("1", FileFormats.DOCX, 2,
+        assertNotEquals(m, new MultimediaFile("1", FileFormats.ACC, 2,
                 "abc", new Duration(3665)));
         assertNotEquals(m, new MultimediaFile("1", FileFormats.MP3, 3,
                 "abc", new Duration(3665)));

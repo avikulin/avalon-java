@@ -38,7 +38,7 @@ class DocumentFileTest {
         assertNotEquals(new DocumentFile("1", FileFormats.DOCX, 2, 3),
                 new DocumentFile("2", FileFormats.DOCX, 2, 3));
         assertNotEquals(new DocumentFile("2", FileFormats.DOCX, 2, 3),
-                new DocumentFile("2", FileFormats.MP3, 2, 3));
+                new DocumentFile("2", FileFormats.XLSX, 2, 3));
         assertNotEquals(new DocumentFile("2", FileFormats.DOCX, 2, 3),
                 new DocumentFile("2", FileFormats.DOCX, 3, 3));
         assertNotEquals(new DocumentFile("2", FileFormats.DOCX, 2, 3),
