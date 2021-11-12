@@ -43,7 +43,6 @@ public class VideoFile extends MultimediaFile {
 
     @Override
     public String getDetailedInfo() {
-        return String.format("%s, %s, %s, %s", this.getFormatId(), this.getContentDescription(),
-                this.getDuration(), this.getThumbPicDimensions());
+        return String.format("%s, %s", super.getDetailedInfo(), this.getThumbPicDimensions());
     }
 }

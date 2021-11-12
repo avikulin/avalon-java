@@ -39,7 +39,7 @@ class VideoFileTest {
                 new Duration(3665), new Dimensions(10,20)));
         assertNotEquals(v, new VideoFile("2", FileFormats.AVI, 2, "abc",
                 new Duration(3665), new Dimensions(10,20)));
-        assertNotEquals(v, new VideoFile("1", FileFormats.DOCX, 2, "abc",
+        assertNotEquals(v, new VideoFile("1", FileFormats.MP4, 2, "abc",
                 new Duration(3665), new Dimensions(10,20)));
         assertNotEquals(v, new VideoFile("1", FileFormats.AVI, 3, "abc",
                 new Duration(3665), new Dimensions(10,20)));
