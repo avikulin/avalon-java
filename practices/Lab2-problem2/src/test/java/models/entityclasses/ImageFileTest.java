@@ -36,7 +36,7 @@ class ImageFileTest {
                      new Dimensions(10, 20)));
         assertNotEquals(i, new ImageFile("2", FileFormats.PNG, 2,
                 new Dimensions(10, 20)));
-        assertNotEquals(i, new ImageFile("1", FileFormats.DOCX, 2,
+        assertNotEquals(i, new ImageFile("1", FileFormats.JPG, 2,
                 new Dimensions(10, 20)));
         assertNotEquals(i, new ImageFile("1", FileFormats.PNG, 3,
                 new Dimensions(10, 20)));
