@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class Book {
@@ -9,19 +10,18 @@ public class Book {
     private String[] authors;
 
     public Book(String name, Publisher publisher, int yearPublished) {
-        this.name = name;
-        this.publisher = publisher;
-        this.yearPublished = yearPublished;
-    }
-
-    public Book(String name, Publisher publisher, String author, int yearPublished) {
-        this(name, publisher, yearPublished);
-        this.authors = new String[]{author};
+        setName(name);
+        setPublisher(publisher);
+        setYearPublished(yearPublished);
     }
 
     public Book(String name, Publisher publisher, int yearPublished, String[] authors) {
         this(name, publisher, yearPublished);
         setAuthors(authors);
+    }
+
+    public Book(String name, Publisher publisher, String author, int yearPublished) {
+        this(name, publisher, yearPublished, new String[]{author});
     }
 
     public String getName() {
@@ -51,7 +51,7 @@ public class Book {
     }
 
     public void setYearPublished(int yearPublished) {
-        if (yearPublished <= 0) {
+        if (yearPublished < 1445 /*раньше Гуттенберга никто не успел*/) {
             throw new IllegalArgumentException("Year must be positive value above 0");
         }
         this.yearPublished = yearPublished;
@@ -84,12 +84,13 @@ public class Book {
     }
 
     public String getAuthorByIdx(int idx) {
-        if (authors.length == 0) {
-            return "";
+        if ((authors == null) || (authors.length == 0)) {
+            throw new IllegalStateException("Authors haven't been defined for this item");
         }
 
         if ((idx < 0) || (idx >= authors.length)) {
-            throw new IllegalArgumentException("Index must not be less 0, and must not exceed the array length");
+            throw new IllegalArgumentException("Index must not be less 0, and must not exceed " +
+                    "the number of authors (starting from 0)");
         }
         return authors[idx];
     }
@@ -114,6 +115,17 @@ public class Book {
             book.print();
         }
         System.out.println("\n");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return yearPublished == book.yearPublished &&
+                name.equals(book.name) &&
+                publisher.equals(book.publisher) &&
+                Arrays.equals(authors, book.authors);
     }
 
     @Override
