@@ -46,7 +46,7 @@ public class BooksRepo implements Iterable<Book> {
 
     @Override
     public Iterator<Book> iterator() {
-        return new BooksIterator(booksStore);
+        return new BooksIterator(booksStore, fillPointer);
     }
 
     @Override
