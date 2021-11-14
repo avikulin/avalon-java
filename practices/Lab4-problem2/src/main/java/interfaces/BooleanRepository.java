@@ -3,6 +3,8 @@ package interfaces;
 public interface BooleanRepository {
     boolean checkElement(int idx) throws IllegalArgumentException;
 
+    int getBitSequenceLength();
+
     void setElement(int idx) throws IllegalArgumentException;
 
     void put(int idx, boolean value) throws IllegalArgumentException;

@@ -1,63 +1,88 @@
 package repository;
 
+import dto.BitPosition;
 import interfaces.BooleanRepository;
 
-import java.util.Iterator;
 import java.util.StringJoiner;
-import java.util.function.Consumer;
 
-public class Repository implements BooleanRepository, Iterable<Boolean> {
-    private boolean[] storage;
+public class Repository implements BooleanRepository {
+    private final int[] storage;
+    private final int bitSequenceLength;
 
-    public Repository(int size) {
-        if (size < 1) {
+    public Repository(int sizeInBits) {
+        if (sizeInBits < 1) {
             throw new IllegalArgumentException("Size must be at least 1");
         }
-        this.storage = new boolean[size];
+        BitPosition bp = new BitPosition(sizeInBits);
+        int numberOfCells = bp.getMajor() + (bp.getMinor() > 0 ? 1 : 0);
+        this.storage = new int[numberOfCells];
+        this.bitSequenceLength = sizeInBits;
     }
 
-    public Repository(boolean[] source) {
+    public Repository(int[] source) {
         if ((source == null) || (source.length == 0)) {
             throw new IllegalArgumentException("Passed array reference must be not-null and points to non-empty array");
         }
         this.storage = source;
+        this.bitSequenceLength = source.length * (BitPosition.MSB);
+    }
+
+    public int getBitSequenceLength() {
+        return bitSequenceLength;
     }
 
     private void checkBounds(int idx) throws IllegalArgumentException {
-        if ((idx < 0) || (idx > storage.length - 1)) {
+        if ((idx < 0) || (idx > bitSequenceLength - 1)) {
             throw new IllegalArgumentException("Index is out of bounds");
         }
     }
 
     public boolean checkElement(int idx) throws IllegalArgumentException {
         checkBounds(idx);
-        return storage[idx];
+        BitPosition bp = new BitPosition(idx);
+        return ((storage[bp.getMajor()] & bp.getMask()) != 0);
     }
 
     public void setElement(int idx) throws IllegalArgumentException {
         checkBounds(idx);
-        storage[idx] = true;
+        BitPosition bp = new BitPosition(idx);
+        storage[bp.getMajor()] |= bp.getMask();
     }
 
     public void put(int idx, boolean value) throws IllegalArgumentException {
         checkBounds(idx);
-        storage[idx] = value;
+        if (value) {
+            setElement(idx);
+        } else {
+            unsetElement(idx);
+        }
     }
 
     public void unsetElement(int idx) throws IllegalArgumentException {
         checkBounds(idx);
-        storage[idx] = false;
+        BitPosition bp = new BitPosition(idx);
+        storage[bp.getMajor()] &= ~bp.getMask();
     }
 
     public void invertElement(int idx) throws IllegalArgumentException {
         checkBounds(idx);
-        storage[idx] = !storage[idx];
+        BitPosition bp = new BitPosition(idx);
+        storage[bp.getMajor()] ^= bp.getMask();
     }
 
     public int countTrueElements() {
         int res = 0;
-        for (boolean e : this) {
-            res += e ? 1 : 0;
+        int processedBitLength = 0;
+        for (int byteId = 0; byteId < storage.length; byteId++) {
+            int mask = 0b1;
+            for (int bitId = 0; bitId < 31; bitId++) {
+                if (processedBitLength == bitSequenceLength) {
+                    break;
+                }
+                res += (storage[byteId] & mask) != 0 ? 1 : 0;
+                mask = mask << 1;
+                processedBitLength++;
+            }
         }
         return res;
     }
@@ -65,32 +90,18 @@ public class Repository implements BooleanRepository, Iterable<Boolean> {
     @Override
     public String toString() {
         StringJoiner res = new StringJoiner(", ", "[", "]");
-        for (boolean e : this) {
-            res.add(e ? "1" : "0");
+        int processedBitLength = 0;
+        for (int byteId = 0; byteId < storage.length; byteId++) {
+            int mask = 0b1;
+            for (int bitId = 0; bitId < 31; bitId++) {
+                if (processedBitLength == bitSequenceLength) {
+                    break;
+                }
+                res.add((storage[byteId] & mask) != 0 ? "1" : "0");
+                mask = mask << 1;
+                processedBitLength++;
+            }
         }
         return res.toString();
-    }
-
-    public Iterator<Boolean> iterator() {
-        return new Iterator<Boolean>() {
-            int currentPos = -1;
-
-            @Override
-            public boolean hasNext() {
-                return currentPos < storage.length - 1;
-            }
-
-            @Override
-            public Boolean next() {
-                currentPos++;
-                return storage[currentPos];
-            }
-        };
-    }
-
-    public void forEach(Consumer<? super Boolean> action) {
-        for (boolean e : this) {
-            action.accept(e);
-        }
     }
 }

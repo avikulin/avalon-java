@@ -1,6 +1,6 @@
 package repository;
 
-import org.junit.jupiter.api.BeforeEach;
+import interfaces.BooleanRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
@@ -12,25 +12,21 @@ class RepositoryTest {
     void ConstructorTest(){
         assertThrows(IllegalArgumentException.class, ()->new Repository(0));
         assertThrows(IllegalArgumentException.class, ()->new Repository(-1));
-        assertThrows(IllegalArgumentException.class, ()->new Repository(null));
-        assertThrows(IllegalArgumentException.class, ()->new Repository(new boolean[]{}));
+        assertThrows(IllegalArgumentException.class, () -> new Repository(null));
+        assertThrows(IllegalArgumentException.class, () -> new Repository(new int[]{}));
         Repository r1 = new Repository(1);
-        Repository r2 = new Repository(new boolean[1]);
+        Repository r2 = new Repository(new int[1]);
     }
 
     @Test
     void checkElement() {
-        Repository r = new Repository(10);
+        int[] b = new int[]{9};
+        Repository r = new Repository(b);
+        Repository r2 = new Repository(4);
 
-        boolean[] b = new boolean[]{true,false,false,true};
-        Repository r2 = new Repository(b);
-
-        int i=0;
-        for(boolean v:r2){
-            assertEquals(v, b[i]);
-            assertEquals(r2.checkElement(i), b[i]);
-
-            assertEquals(r.checkElement(i), false);
+        for (int i = 0; i < 4; i++) {
+            assertEquals(r.checkElement(i), (b[0] & 1 << i)!=0);
+            assertFalse(r2.checkElement(i));
             i++;
         }
     }
@@ -40,17 +36,18 @@ class RepositoryTest {
         Repository r = new Repository(10);
         assertThrows(IllegalArgumentException.class, ()->r.setElement(-1));
         assertThrows(IllegalArgumentException.class, ()->r.setElement(11));
-        assertEquals(r.checkElement(0), false);
+
+        assertFalse(r.checkElement(0));
         r.setElement(0);
-        assertEquals(r.checkElement(0), true);
+        assertTrue(r.checkElement(0));
 
-        assertEquals(r.checkElement(1), false);
+        assertFalse(r.checkElement(1));
         r.setElement(1);
-        assertEquals(r.checkElement(1), true);
+        assertTrue(r.checkElement(1));
 
-        assertEquals(r.checkElement(9), false);
+        assertFalse(r.checkElement(9));
         r.setElement(9);
-        assertEquals(r.checkElement(9), true);
+        assertTrue(r.checkElement(9));
     }
 
     @Test
@@ -59,106 +56,109 @@ class RepositoryTest {
         assertThrows(IllegalArgumentException.class, ()->r.put(-1, true));
         assertThrows(IllegalArgumentException.class, ()->r.put(11, true));
 
-        assertEquals(r.checkElement(0), false);
+        assertFalse(r.checkElement(0));
         r.put(0, true);
-        assertEquals(r.checkElement(0), true);
+        assertTrue(r.checkElement(0));
 
-        assertEquals(r.checkElement(1), false);
+        assertFalse(r.checkElement(1));
         r.put(1, true);
-        assertEquals(r.checkElement(1), true);
+        assertTrue(r.checkElement(1));
 
-        assertEquals(r.checkElement(9), false);
+        assertFalse(r.checkElement(9));
         r.put(9, true);
-        assertEquals(r.checkElement(9), true);
+        assertTrue(r.checkElement(9));
     }
 
     @Test
     void unsetElement() {
-        Repository r = new Repository(new boolean[]{true,true,true,true,true,true,true,true,true,true});
+        int[] b = new int[]{0b1000000000000000000000000000001, 0b1000000000000000000000000000001};
+        Repository r = new Repository(b);
 
         assertThrows(IllegalArgumentException.class, ()->r.setElement(-1));
-        assertThrows(IllegalArgumentException.class, ()->r.setElement(11));
+        assertThrows(IllegalArgumentException.class, ()->r.setElement(62));
 
-        assertEquals(r.checkElement(0), true);
+        assertTrue(r.checkElement(0));
         r.unsetElement(0);
-        assertEquals(r.checkElement(0), false);
+        assertFalse(r.checkElement(0));
 
-        assertEquals(r.checkElement(1), true);
-        r.unsetElement(1);
-        assertEquals(r.checkElement(1), false);
+        assertTrue(r.checkElement(30));
+        r.unsetElement(30);
+        assertFalse(r.checkElement(30));
 
-        assertEquals(r.checkElement(9), true);
-        r.unsetElement(9);
-        assertEquals(r.checkElement(9), false);
+        assertTrue(r.checkElement(31));
+        r.unsetElement(31);
+        assertFalse(r.checkElement(31));
+
+        assertTrue(r.checkElement(61));
+        r.unsetElement(61);
+        assertFalse(r.checkElement(61));
+
+        assertEquals(b[0], 0);
+        assertEquals(b[1], 0);
     }
 
     @Test
     void invertElement() {
-        Repository r = new Repository(10);
-        assertThrows(IllegalArgumentException.class, ()->r.put(-1, true));
-        assertThrows(IllegalArgumentException.class, ()->r.put(11, true));
+        int[] b = new int[]{0b1000000000000000000000000000001, 0b1000000000000000000000000000001};
+        Repository r = new Repository(b);
 
-        assertEquals(r.checkElement(0), false);
-        r.put(0, true);
-        assertEquals(r.checkElement(0), true);
+        assertThrows(IllegalArgumentException.class, ()->r.setElement(-1));
+        assertThrows(IllegalArgumentException.class, ()->r.setElement(62));
 
-        assertEquals(r.checkElement(1), false);
-        r.put(1, true);
-        assertEquals(r.checkElement(1), true);
+        assertTrue(r.checkElement(0));
+        r.invertElement(0);
+        assertFalse(r.checkElement(0));
 
-        assertEquals(r.checkElement(9), false);
-        r.put(9, true);
-        assertEquals(r.checkElement(9), true);
+        assertTrue(r.checkElement(30));
+        r.invertElement(30);
+        assertFalse(r.checkElement(30));
+
+        assertTrue(r.checkElement(31));
+        r.invertElement(31);
+        assertFalse(r.checkElement(31));
+
+        assertTrue(r.checkElement(61));
+        r.invertElement(61);
+        assertFalse(r.checkElement(61));
+
+        assertEquals(b[0], 0);
+        assertEquals(b[1], 0);
     }
 
     @Test
     void countTrueElements() {
-        assertEquals(new Repository(new boolean[]{false}).countTrueElements(),0);
-        assertEquals(new Repository(new boolean[]{false, false}).countTrueElements(),0);
-        assertEquals(new Repository(new boolean[]{true}).countTrueElements(),1);
-        assertEquals(new Repository(new boolean[]{true, true}).countTrueElements(),2);
-        assertEquals(new Repository(new boolean[]{true, false, false, true}).countTrueElements(),2);
-        assertEquals(new Repository(new boolean[]{false, true, true, false}).countTrueElements(),2);
+        assertEquals(new Repository(new int[]{0b0}).countTrueElements(),0);
+        assertEquals(new Repository(new int[]{0b0, 0b0}).countTrueElements(),0);
+        assertEquals(new Repository(new int[]{0b1000000000000000000000000000000}).countTrueElements(),1);
+        assertEquals(new Repository(new int[]{0b1000000000000000000000000000000,
+                                              0b0000000000000000000000000000001}).countTrueElements(),2);
+        assertEquals(new Repository(new int[]{0b0000000000000000000000000000001,
+                                              0b1000000000000000000000000000000}).countTrueElements(),2);
+        assertEquals(new Repository(new int[]{0b1000000000000000000000000000001,
+                                              0b1000000000000000000000000000001}).countTrueElements(),4);
     }
 
     @Test
     void testToString() {
-        assertEquals(new Repository(new boolean[]{false}).toString(),"[0]");
-        assertEquals(new Repository(new boolean[]{false, false}).toString(),"[0, 0]");
-        assertEquals(new Repository(new boolean[]{true}).toString(),"[1]");
-        assertEquals(new Repository(new boolean[]{true, true}).toString(),"[1, 1]");
-        assertEquals(new Repository(new boolean[]{true, false, false, true}).toString(),"[1, 0, 0, 1]");
-        assertEquals(new Repository(new boolean[]{false, true, true, false}).toString(),"[0, 1, 1, 0]");
+        assertEquals(new Repository(1).toString(),"[0]");
+        assertEquals(new Repository(2).toString(),"[0, 0]");
+
+        BooleanRepository r = new Repository(1);
+        r.setElement(0);
+        assertEquals(r.toString(),"[1]");
+
+        BooleanRepository r2 = new Repository(2);
+        r2.setElement(0);
+        r2.setElement(1);
+        assertEquals(r2.toString(),"[1, 1]");
+
+        assertEquals(new Repository(new int[]{0b1000000000000000000000000000001}).toString(),
+               "[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]");
+
+        assertEquals(new Repository(new int[]{0b1000000000000000000000000000001,
+                                              0b1000000000000000000000000000001}).toString(),
+                "[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, " +
+                       "1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]");
     }
 
-    @Test
-    void iterator() {
-        Repository r = new Repository(1);
-        int counter = 0;
-        for(boolean b: r){
-            counter++;
-        }
-        assertEquals(counter, 1);
-
-        Repository r2 = new Repository(10);
-        counter = 0;
-        for(boolean b: r2){
-            counter++;
-        }
-        assertEquals(counter, 10);
-    }
-
-    @Test
-    void forEach() {
-        final int[] counter = new int[1];
-        Consumer<Boolean> f = (x) -> counter[0] = counter[0] + 1;
-        Repository r = new Repository(1);
-        r.forEach(f);
-        assertEquals(counter[0], 1);
-
-        Repository r2 = new Repository(10);
-        counter[0] = 0;
-        r2.forEach(f);
-        assertEquals(counter[0], 10);
-    }
 }
