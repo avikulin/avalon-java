@@ -1,0 +1,21 @@
+class ExpressionProcessor {
+    public String process(String prefix, int multiplicand, String template)
+}
+
+class GrammarProcessor {
+    public GrammarProcessor(ExpressionProcessor processor)
+    public void init(String context)
+    public void enterSubExpression(int offset)
+    public void returnFromSubExpression(int offset)
+    public void processGlobalSuffix()
+    public String getCurrentLocalResult()
+}
+
+class LexicalParser {
+    public LexicalParser(GrammarProcessor processor)
+    public String process(String rawString)
+}
+
+expr ::= <add-term> ( ("+" | "-") <add-term> )*
+add-term ::= <mult-term> ( ("*" | "/") <mult-term> )*
+mult-term ::= <number> | <variable> | "(" <expr> ")"
