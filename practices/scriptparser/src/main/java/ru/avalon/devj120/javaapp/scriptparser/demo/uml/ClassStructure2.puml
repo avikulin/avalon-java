@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+interface Command{
+    +CommandType getType()
+    +void setLValue(String value)
+    +String getLValue()
+    +boolean hasLValue()
+    +void setRValue(ExpressionTree value)
+    +ArrayList<ExpressionTree> getRValue()
+    +boolean hasRValue()
+}
+
+interface TreeNode{
+    +setType(NodeType type)
+    +NodeType getType()
+
+}
+
+enum OperatorType{
+    SUM
+    SUB
+    MUL
+    DIV
+}
+
+enum CommandType{
+    SET
+    PRINT
+    TRACE
+}
+
+enum NodeType{
+    Literal
+    Variable
+    Expression
+}
+
+@enduml
