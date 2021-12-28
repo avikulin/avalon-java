@@ -1,0 +1,63 @@
+# Простая работа с переменными
+print "[ Пример работы с простыми арифметическими выражениями ]"
+set $x = 1.02
+print "x=",$x
+set $y = 3.5*$x
+print "y=",$y
+set $z = 4.2 * ($y / $x)
+print "z=",$z
+print ""
+
+print "[ Пример работы с вложенными выражениями]"
+set $x = ((1.02)+((0+0)))
+print "((1.02)+((0+0))) = ",$x
+set $y = ((2)+($x+1))*((0)+(5))
+print "$x=",$x, " => ((2)+($x+1))*((0)+(5))=",$y
+set $z = ((((((1))))))
+print "((((((1))))))=",$z
+print ""
+
+# Пример чуть посложнее
+print "[ Пример работы с функциональными вложенными выражениями ]"
+set $total = $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11)
+print "$x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = ", $total
+print ""
+
+print "[ Пример работы с аргументами коммандной строки ]"
+set $pi = arg(0)
+set $minus_1 = arg(1)
+set $res = $pi*$minus_1
+print "Умножаем значения второго и третьего аргумента командной строки:", $res
+print ""
+
+print "[ Тест основного логарифмического тождества ]"
+input "Введите число для экспоненциального теста", $exp_test
+set $res = ln(exp($exp_test))
+print "LN(EXP(",$exp_test,")) = ",$exp_test
+print ""
+
+print "[ Тест основного тригонометрического тождества тождества ]"
+input "Введите значение произвольного угла, град.", $test_angle
+set $angle_rad = rad($test_angle)
+print "Значение угла в радианах, рад.: ", $angle_rad
+set $res = sin($angle_rad)*sin($angle_rad)+cos($angle_rad)*cos($angle_rad)
+print "sin(", $angle_rad , ")^2+cos(" , $angle_rad , ")^2 = ", $res
+print ""
+
+print "[ Тест формулы тангенса двойного угла ]"
+input "Введите значение произвольного угла, град.", $test_angle
+set $angle_rad = rad($test_angle)
+print "Значение угла в радианах, рад.: ", $angle_rad
+set $double_angle_rad = 2*$angle_rad
+print "Значение двойного угла в радианах, рад.: ", $double_angle_rad
+set $tg_double_angle = tg($double_angle_rad)
+print "tg(2*", $angle_rad,") = ",$tg_double_angle
+set $tg_double_angle2 = 2*tg($angle_rad)/(1 - tg($angle_rad)*tg($angle_rad))
+print "2*tg(", $angle_rad,")/(1-tg(",$angle_rad,")^2) = ",$tg_double_angle2
+
+print ""
+print "[ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]"
+set $wrong_value = arg(2)
+
+# Если надо - можем выйти из интерпретатора по окончании скрипта (иначе он перейдет в интерактивный режим)
+# quite

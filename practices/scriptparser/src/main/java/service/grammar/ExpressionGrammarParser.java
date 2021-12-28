@@ -24,6 +24,20 @@ public class ExpressionGrammarParser implements GrammarAnalyzer {
         this.exprNodeFabric = expressionFabric;
     }
 
+    private boolean isBracketsMatch(final List<Token> source, int startPos, int endPos){
+        int numberOfLeftBracketsBetween = 0;
+        for (int i=startPos; i <=endPos;i++){
+            if(source.get(i).getType() == TokenType.LEFT_BRACKET){
+                numberOfLeftBracketsBetween++;
+            }
+            if(source.get(i).getType() == TokenType.RIGHT_BRACKET){
+                numberOfLeftBracketsBetween--;
+                numberOfLeftBracketsBetween = Math.max(0, numberOfLeftBracketsBetween);
+            }
+        }
+        return numberOfLeftBracketsBetween == 0;
+    }
+
     private OperationSearchResult findLastMinimalPriorityOperation(final List<Token> source, int startPos, int endPos) {
         Deque<Integer> bracketsMatch = new ArrayDeque<>();
         int operationPos = RESULT_NOT_FOUND;
@@ -149,7 +163,8 @@ public class ExpressionGrammarParser implements GrammarAnalyzer {
         }
 
         // обрабатываем вариант в)
-        if (fistTokenType == TokenType.LEFT_BRACKET && endTokenType == TokenType.RIGHT_BRACKET) {
+        if (fistTokenType == TokenType.LEFT_BRACKET &&
+                endTokenType == TokenType.RIGHT_BRACKET&&isBracketsMatch(source, startPos+1, endPos-1)){
             if (endPos - startPos > 1) {
                 //раскрываем скобки и передаем на следующий уровень рекурсии
                 int subExprStart = startPos + 1;
@@ -164,7 +179,20 @@ public class ExpressionGrammarParser implements GrammarAnalyzer {
 
         // обрабатываем вариант б)
         if (fistTokenType == TokenType.FUNCTION && endTokenType == TokenType.RIGHT_BRACKET) {
-            if (endPos - startPos > 2 && source.get(startPos + 1).getType() == TokenType.LEFT_BRACKET) {
+            /*int numberOfLeftBracketsBetween = 0;
+            for (int i=startPos + 2; i <endPos;i++){
+                if(source.get(i).getType() == TokenType.LEFT_BRACKET){
+                  numberOfLeftBracketsBetween++;
+                }
+                if(source.get(i).getType() == TokenType.RIGHT_BRACKET){
+                    numberOfLeftBracketsBetween--;
+                    numberOfLeftBracketsBetween = Math.max(0, numberOfLeftBracketsBetween);
+                }
+            }*/
+            if (endPos - startPos > 2 &&
+                source.get(startPos + 1).getType() == TokenType.LEFT_BRACKET &&
+                isBracketsMatch(source, startPos +2, endPos - 1))
+            {
                 FunctionType fun = FunctionType.fromString(firstToken.getSource());
                 //раскрываем скобки и передаем на следующий уровень рекурсии
                 int subExprStart = startPos + 2;
@@ -173,9 +201,6 @@ public class ExpressionGrammarParser implements GrammarAnalyzer {
                 //формируем функциональный узел
                 return exprNodeFabric.createFunctionNode(fun, funSubExpression);
             }
-
-            String msg = "Expression string passed have inconsistency in function formatting at pos. %d";
-            throw new IllegalArgumentException(String.format(msg, startPos));
         }
 
         // обрабатываем вариант а)

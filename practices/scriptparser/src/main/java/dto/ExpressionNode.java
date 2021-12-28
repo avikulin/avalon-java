@@ -2,13 +2,13 @@ package dto;
 
 import contracts.dataobjects.Expression;
 import enums.FunctionType;
-import enums.NodeType;
+import enums.ExpressionNodeType;
 import enums.OperationType;
 
 import java.text.DecimalFormat;
 
 public class ExpressionNode implements Expression {
-    private NodeType type;
+    private ExpressionNodeType type;
     private double numericValue;
     private String stringValue;
     private OperationType operator;
@@ -21,7 +21,7 @@ public class ExpressionNode implements Expression {
      * @param value
      */
     public ExpressionNode(Double value){
-        setType(NodeType.NUMBER_LITERAL);
+        setType(ExpressionNodeType.NUMBER_LITERAL);
         setOperator(OperationType.NOT_AN_OPERATION);
         setNumericValue(value);
     }
@@ -31,24 +31,24 @@ public class ExpressionNode implements Expression {
      * @param value
      */
     public ExpressionNode(String value){
-        setType(NodeType.STRING_LITERAL);
+        setType(ExpressionNodeType.STRING_LITERAL);
         setOperator(OperationType.NOT_AN_OPERATION);
         setStringValue(value);
     }
 
-    public ExpressionNode(NodeType type, OperationType operator) throws NullPointerException {
+    public ExpressionNode(ExpressionNodeType type, OperationType operator) throws NullPointerException {
         setType(type);
         setOperator(operator);
     }
 
-    public ExpressionNode(NodeType type, OperationType operator, Expression left, Expression right) throws NullPointerException {
+    public ExpressionNode(ExpressionNodeType type, OperationType operator, Expression left, Expression right) throws NullPointerException {
         setType(type);
         setOperator(operator);
         setLeft(left);
         setRight(right);
     }
 
-    public void setType(NodeType type) throws NullPointerException {
+    public void setType(ExpressionNodeType type) throws NullPointerException {
         if (type == null){
             throw new NullPointerException("Type param reference must be set");
         }
@@ -60,7 +60,7 @@ public class ExpressionNode implements Expression {
             throw new NullPointerException("Operation type param reference must be set");
         }
 
-        if ((operator != OperationType.NOT_AN_OPERATION)&&(type!= NodeType.EXPRESSION)){
+        if ((operator != OperationType.NOT_AN_OPERATION)&&(type!= ExpressionNodeType.EXPRESSION)){
             throw new IllegalStateException(
                     String.format("This node type (%s) is incompatible with operation type provided (%s)",
                             type, operator));
@@ -77,14 +77,14 @@ public class ExpressionNode implements Expression {
     }
 
     public FunctionType getFunction() {
-        if (type!=NodeType.FUNCTION){
+        if (type!= ExpressionNodeType.FUNCTION){
             throw new IllegalStateException("Current node is not a function node");
         }
         return func;
     }
 
     public void setFunction(FunctionType func) {
-        if (type!=NodeType.FUNCTION){
+        if (type!= ExpressionNodeType.FUNCTION){
             throw new IllegalStateException("Current node is not a function node");
         }
         this.func = func;
@@ -105,13 +105,13 @@ public class ExpressionNode implements Expression {
     }
 
     @Override
-    public NodeType getType() {
+    public ExpressionNodeType getType() {
         return type;
     }
 
     @Override
     public Double getNumericValue() {
-        if (type != NodeType.NUMBER_LITERAL){
+        if (type != ExpressionNodeType.NUMBER_LITERAL){
             throw new IllegalStateException("Node does not contain numeric value");
         }
         return numericValue;
@@ -119,7 +119,7 @@ public class ExpressionNode implements Expression {
 
     @Override
     public String getStringValue() {
-        if (type == NodeType.NUMBER_LITERAL){
+        if (type == ExpressionNodeType.NUMBER_LITERAL){
             throw new IllegalStateException("Node does not contain numeric value");
         }
         return stringValue;

@@ -1,8 +1,10 @@
 package utils;
 
-import contracts.businesslogic.DiagnosticLogger;
+import contracts.businesslogic.utils.DiagnosticLogger;
 import enums.EventType;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,6 +32,15 @@ public class Tracer implements DiagnosticLogger {
     public void logError(Class<?> source, String... event) {
         String s = String.join(" ",event);
         trace(source, EventType.ERROR,s);
+    }
+
+    @Override
+    public void logError(Class<?> source, Exception e, String... event) {
+        logError(source, event);
+        StringWriter stackTraceContent = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stackTraceContent);
+        e.printStackTrace(printWriter);
+        trace(source, EventType.ERROR,"\t".concat(stackTraceContent.toString()));
     }
 
     @Override

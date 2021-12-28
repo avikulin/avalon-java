@@ -1,6 +1,6 @@
 package service.lexer;
 
-import contracts.businesslogic.DiagnosticLogger;
+import contracts.businesslogic.utils.DiagnosticLogger;
 import contracts.businesslogic.analyzers.GrammarAnalyzer;
 import contracts.businesslogic.analyzers.LexicalAnalyzer;
 import contracts.businesslogic.fabrics.GrammarFabric;
@@ -46,6 +46,12 @@ public class LexicalParser implements LexicalAnalyzer {
 
         StringTokenizer literalTokenizer = new StringTokenizer(sourceText);
         String cmdToken = literalTokenizer.nextToken();
+        if (cmdToken == null||cmdToken.isEmpty()){
+            String msg = String.format("Wrong format of the command at line #", cmdId);
+            logger.logError(this.getClass(), msg);
+            throw new IllegalArgumentException();
+        }
+
         String valueToken = sourceText.substring(cmdToken.length()).trim();
 
         CommandType type = detectClass(cmdToken);
@@ -59,7 +65,7 @@ public class LexicalParser implements LexicalAnalyzer {
                 int separationPos = valueToken.indexOf(SEPARATOR_EQUALITY_SYMBOL);
                 if (separationPos == RESULT_NOT_FOUND) {
                     String msg = "Wrong format of the SET command: symbol '=' is absent";
-                    logger.logError(this.getClass(),msg);
+                    logger.logError(this.getClass(), msg);
                     throw new IllegalArgumentException(msg);
                 }
 
@@ -107,7 +113,7 @@ public class LexicalParser implements LexicalAnalyzer {
 
                 if (tokens.size() > 2) {
                     String msg = "Wrong format of the INPUT command: only 2 params should be pass";
-                    logger.logError(this.getClass(),msg);
+                    logger.logError(this.getClass(), msg);
                     throw new IllegalArgumentException(msg);
                 }
 
@@ -119,7 +125,13 @@ public class LexicalParser implements LexicalAnalyzer {
                 return cmd;
             }
 
-            case TRACE: {
+            case TRACE:
+
+            case HELP:
+
+            case QUITE:
+
+            case COMMENT:{
                 Statement cmd = new Command(cmdId, type, null);
                 logger.logInfo(this.getClass(), "\tcommand compiled:", cmd.toString());
                 return cmd;
@@ -127,7 +139,7 @@ public class LexicalParser implements LexicalAnalyzer {
 
             default: {
                 String msg = "Unknown command type";
-                logger.logError(this.getClass(),msg);
+                logger.logError(this.getClass(), msg);
                 throw new UnsupportedOperationException(msg);
             }
         }

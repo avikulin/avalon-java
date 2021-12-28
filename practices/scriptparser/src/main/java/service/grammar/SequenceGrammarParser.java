@@ -29,10 +29,7 @@ public class SequenceGrammarParser implements GrammarAnalyzer {
         String source = token.getSource();
         switch (type) {
             case STRING_LITERAL: {
-                if (source.length() > 2) {
-                    return exprNodeFabric.createLiteralNode(source);
-                }
-                // не создаем пустые литеральные узлы, чтобы их не нужно было обрабатывать: ""
+                return exprNodeFabric.createLiteralNode(source);
             }
             case VARIABLE:
                 return exprNodeFabric.createVariableNode(source.trim());

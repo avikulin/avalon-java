@@ -1,24 +1,27 @@
 package service.interpreter;
 
+import contracts.businesslogic.utils.DiagnosticLogger;
 import contracts.dataobjects.Expression;
+import enums.ExpressionNodeType;
 import enums.FunctionType;
-import enums.NodeType;
 import enums.OperationType;
+import utils.Tracer;
 
 import java.util.Map;
 
 public class ExpressionInterpreterImpl implements contracts.businesslogic.interpreters.ExpressionInterpreter {
     private Map<String, Double> variableContext;
+    private DiagnosticLogger logger;
 
-    public ExpressionInterpreterImpl(Map<String, Double> variableContext) {
-        if (variableContext == null) {
-            throw new NullPointerException("Variable context object param must be set");
-        }
-        this.variableContext = variableContext;
+    public ExpressionInterpreterImpl() {
+        logger = Tracer.get();
     }
 
+
     private double interpretStringLiteral(Expression expression) {
-        throw new UnsupportedOperationException("String literals aren't supported in this grammar");
+        String msg = "String literals aren't supported in this grammar";
+        logger.logError(this.getClass(), msg);
+        throw new UnsupportedOperationException(msg);
     }
 
     private double interpretNumberLiteral(Expression expression) {
@@ -26,10 +29,17 @@ public class ExpressionInterpreterImpl implements contracts.businesslogic.interp
     }
 
     private double interpretVariable(Expression expression) {
+        if (variableContext == null) {
+            String msg = "Variable context haven't been properly set";
+            logger.logError(this.getClass(), msg);
+            throw new UnsupportedOperationException(msg);
+        }
+
         String variableName = expression.getStringValue();
         Double value = variableContext.get(variableName);
         if (value == null) {
             String msg = "Variable haven't been previously set: ".concat(variableName);
+            logger.logError(this.getClass(), msg);
             throw new IllegalStateException(msg);
         }
         return value;
@@ -43,6 +53,7 @@ public class ExpressionInterpreterImpl implements contracts.businesslogic.interp
             return fun.getDelegate().apply(funArgumentValue);
         } catch (ArithmeticException | IllegalStateException ex) {
             String msg = String.format("Error in calculation: %s(%s)", fun.toString(), subExpression.toString());
+            logger.logError(this.getClass(), ex, msg);
             throw new ArithmeticException(msg);
         }
     }
@@ -54,34 +65,32 @@ public class ExpressionInterpreterImpl implements contracts.businesslogic.interp
         try {
             double lvalue = interpretExpression(leftPart);
             double rvalue = interpretExpression(rightPart);
-            switch (operationType) {
-                case SUM:
-                    return lvalue + rvalue;
-                case SUB:
-                    return lvalue - rvalue;
-                case MUL:
-                    return lvalue * rvalue;
-                case DIV:
-                    return lvalue / rvalue; // тут если что поймаем ArithmeticException в блоке catch(..)
-                case NOT_AN_OPERATION:
-                default: {
-                    String msg = "Incorrect operation type for such type of expression: ".concat(expression.toString());
-                    throw new IllegalStateException(msg);
-                }
-            }
+            return operationType.getDelegate().apply(lvalue, rvalue);
         } catch (ArithmeticException | IllegalStateException ex) {
             String msg = String.format("Error in calculation: %s", expression.toString());
+            logger.logError(this.getClass(), ex, msg);
             throw new ArithmeticException(msg);
         }
+    }
+
+    @Override
+    public void registerVariableContext(Map<String, Double> variableContext) {
+        if (variableContext == null) {
+            String msg = "Variable context object param must be set";
+            logger.logError(this.getClass(), msg);
+            throw new NullPointerException(msg);
+        }
+        this.variableContext = variableContext;
     }
 
     @Override
     public double interpretExpression(Expression expression) {
         if (expression == null) {
             String msg = "Expression object param must be set";
+            logger.logError(this.getClass(), msg);
             throw new IllegalArgumentException(msg);
         }
-        NodeType type = expression.getType();
+        ExpressionNodeType type = expression.getType();
         switch (type) {
             case NUMBER_LITERAL:
                 return interpretNumberLiteral(expression);

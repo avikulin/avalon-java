@@ -5,12 +5,19 @@ import contracts.dataobjects.Token;
 import dto.StatementToken;
 import enums.FunctionType;
 import enums.OperationType;
-import enums.SeparatorType;
 import enums.TokenType;
+
+import java.util.regex.Pattern;
 
 import static constants.Constants.*;
 
 public class TokenFabricImpl implements TokenFabric {
+    private Pattern variableMatcher;
+
+    public TokenFabricImpl() {
+        variableMatcher = Pattern.compile("^\\$[a-zA-Z](\\w*)$");
+    }
+
     @Override
     public Token createLBracketToken(String source) {
         return new StatementToken(TokenType.LEFT_BRACKET, source);
@@ -66,8 +73,8 @@ public class TokenFabricImpl implements TokenFabric {
             return createNumberLiteralToken(source);
         }
 
-        //переменная: первым стоит символ "$", после чего как минимум 1 символ
-        if (SeparatorType.isVariableMarker(firstChar) && source.length() > VARIABLE_LITERAL_LENGTH) {
+        //переменная: первым стоит символ "$", после чего как минимум 1 буква, потом буквы, цифры, подчеркивание
+        if (variableMatcher.matcher(source).matches()) {
             return createVariableToken(source);
         }
 
@@ -77,18 +84,17 @@ public class TokenFabricImpl implements TokenFabric {
             return createOperationToken(source);
         }
 
-        //функция: 3 символа, совпадают с именем одной из функций
-        if (source.length() == FunctionType.getDisplayNameLength() &&
-                FunctionType.fromString(source) != FunctionType.NOT_A_FUNCTION) {
+        //функция: посимвольно совпадает с именем одной из функций
+        if (FunctionType.fromString(source) != FunctionType.NOT_A_FUNCTION) {
             return createFunctionToken(source);
         }
 
-        //строковой литерал: если не подошло ни одно из вышестоящих правил
+        //строковой литерал: заключен в символы двойных кавычек на концах строки
         if (firstChar == SEPARATOR_QUOTE_SYMBOL && lastChar == SEPARATOR_QUOTE_SYMBOL) {
             return createStringLiteralToken(source.substring(1, sourceLength - 1));
         }
 
         //если не подошло ни одно из правил, значит токен не совпадет ни с одной из грамматик
-        throw new IllegalArgumentException("String is not a valid statement");
+        throw new IllegalArgumentException("String is not a valid statement: ".concat(source));
     }
 }

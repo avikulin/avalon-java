@@ -1,6 +1,6 @@
 package enums;
 
-public enum NodeType {
+public enum ExpressionNodeType {
     STRING_LITERAL,
     NUMBER_LITERAL,
     VARIABLE,

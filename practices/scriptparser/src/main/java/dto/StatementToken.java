@@ -20,7 +20,7 @@ public class StatementToken implements Token {
     }
 
     private void setSourceText(String sourceText) {
-        if (sourceText == null || sourceText.isEmpty()) {
+        if (sourceText == null) {
             throw new NullPointerException("Source text param must be not-null and non-empty string");
         }
         this.sourceText = sourceText;

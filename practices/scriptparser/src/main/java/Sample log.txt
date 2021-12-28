@@ -1,0 +1,605 @@
+"C:\Program Files\Java\jdk1.8.0_202\bin\java.exe" -Dvisualvm.id=349088352707500 "-javaagent:C:\Program Files\JetBrains\ideaIU-2020.1.windows\lib\idea_rt.jar=59419:C:\Program Files\JetBrains\ideaIU-2020.1.windows\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\git\avalon\practices\scriptparser\target\classes" Main filename=src\main\java\Script.avl 3.14159 -1 abc
+
+Command-line parameters received: filename=src\main\java\Script.avl 3.14159 -1 abc
+
+Welcome to Avalon Script Interpreter (ASI)
+------------------------------------------
+Current dir: C:\git\avalon\practices\scriptparser\.
+
+Executing script from file: C:\git\avalon\practices\scriptparser\src\main\java\Script.avl
+
+[ Пример работы с простыми арифметическими выражениями ]
+x=1,02
+y=3,57
+z=14,7
+
+[ Пример работы с вложенными выражениями]
+((1.02)+((0+0))) = 1,02
+$x=1,02 => ((2)+($x+1))*((0)+(5))=20,1
+((((((1))))))=1,0
+
+[ Пример работы с функциональными вложенными выражениями ]
+$x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = 16,4268
+
+[ Пример работы с аргументами коммандной строки ]
+Умножаем значения второго и третьего аргумента командной строки:-3,1416
+
+[ Тест основного логарифмического тождества ]
+Введите число для экспоненциального теста : 13
+LN(EXP(13,0)) = 13,0
+
+[ Тест основного тригонометрического тождества тождества ]
+Введите значение произвольного угла, град. : 45
+Значение угла в радианах, рад.: 0,7854
+sin(0,7854)^2+cos(0,7854)^2 = 1,0
+
+[ Тест формулы тангенса двойного угла ]
+Введите значение произвольного угла, град. : 30
+Значение угла в радианах, рад.: 0,5236
+Значение двойного угла в радианах, рад.: 1,0472
+tg(2*0,5236) = 1,7321
+2*tg(0,5236)/(1-tg(0,5236)^2) = 1,7321
+
+[ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]
+
+!Unexpected error at line #60: Error in calculation: arg(2,0)
+Entering interactive mode (type "quite" to exit)...
+
+asi> trace
+Diagnostic log:
+   1) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 1 : # Простая работа с переменными
+   2) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: #comment
+   3) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: #comment
+   4) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.CommentCmdInterpreter]: Interpreting command # 1 :  #comment
+   5) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 2 : print "[ Пример работы с простыми арифметическими выражениями ]"
+   6) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+   7) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "[ Пример работы с простыми арифметическими выражениями ]"
+   8) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Пример работы с простыми арифметическими выражениями ]}
+   9) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print [ Пример работы с простыми арифметическими выражениями ]
+  10) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 2 :  print [ Пример работы с простыми арифметическими выражениями ]
+  11) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Пример работы с простыми арифметическими выражениями ]
+  12) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 2  is done
+  13) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 3 : set $x = 1.02
+  14) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+  15) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $x
+  16) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: 1.02
+  17) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {NUMBER_LITERAL, 1.02}
+  18) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: 1,02
+  19) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $x = 1,02
+  20) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 3 :  set $x = 1,02
+  21) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $x
+  22) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $x
+  23) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+  24) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 4 : print "x=",$x
+  25) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+  26) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "x=",$x
+  27) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, x=}{VARIABLE, $x}
+  28) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print x=,$x
+  29) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 4 :  print x=,$x
+  30) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  x=
+  31) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $x successfully printed:  1,02
+  32) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 4  is done
+  33) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 5 : set $y = 3.5*$x
+  34) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+  35) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $y
+  36) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: 3.5*$x
+  37) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {NUMBER_LITERAL, 3.5}{OPERATION, *}{VARIABLE, $x}
+  38) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: (3,5)*($x)
+  39) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $y = (3,5)*($x)
+  40) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 5 :  set $y = (3,5)*($x)
+  41) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $y
+  42) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $y
+  43) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+  44) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 6 : print "y=",$y
+  45) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+  46) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "y=",$y
+  47) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, y=}{VARIABLE, $y}
+  48) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print y=,$y
+  49) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 6 :  print y=,$y
+  50) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  y=
+  51) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $y successfully printed:  3,57
+  52) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 6  is done
+  53) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 7 : set $z = 4.2 * ($y / $x)
+  54) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+  55) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $z
+  56) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: 4.2 * ($y / $x)
+  57) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {NUMBER_LITERAL, 4.2}{OPERATION, *}{LEFT_BRACKET, (}{VARIABLE, $y}{OPERATION, /}{VARIABLE, $x}{RIGHT_BRACKET, )}
+  58) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: (4,2)*(($y)/($x))
+  59) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $z = (4,2)*(($y)/($x))
+  60) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 7 :  set $z = (4,2)*(($y)/($x))
+  61) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $z
+  62) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $z
+  63) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+  64) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 8 : print "z=",$z
+  65) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+  66) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "z=",$z
+  67) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, z=}{VARIABLE, $z}
+  68) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print z=,$z
+  69) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 8 :  print z=,$z
+  70) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  z=
+  71) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $z successfully printed:  14,7
+  72) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 8  is done
+  73) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 9 : print ""
+  74) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+  75) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: ""
+  76) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+  77) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print
+  78) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 9 :  print
+  79) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+  80) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 9  is done
+  81) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 11 : print "[ Пример работы с вложенными выражениями]"
+  82) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+  83) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "[ Пример работы с вложенными выражениями]"
+  84) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Пример работы с вложенными выражениями]}
+  85) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print [ Пример работы с вложенными выражениями]
+  86) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 11 :  print [ Пример работы с вложенными выражениями]
+  87) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Пример работы с вложенными выражениями]
+  88) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 11  is done
+  89) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 12 : set $x = ((1.02)+((0+0)))
+  90) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+  91) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $x
+  92) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: ((1.02)+((0+0)))
+  93) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {LEFT_BRACKET, (}{LEFT_BRACKET, (}{NUMBER_LITERAL, 1.02}{RIGHT_BRACKET, )}{OPERATION, +}{LEFT_BRACKET, (}{LEFT_BRACKET, (}{NUMBER_LITERAL, 0}{OPERATION, +}{NUMBER_LITERAL, 0}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}
+  94) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: (1,02)+((,0)+(,0))
+  95) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $x = (1,02)+((,0)+(,0))
+  96) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 12 :  set $x = (1,02)+((,0)+(,0))
+  97) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $x
+  98) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $x
+  99) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 100) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 13 : print "((1.02)+((0+0))) = ",$x
+ 101) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 102) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "((1.02)+((0+0))) = ",$x
+ 103) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, ((1.02)+((0+0))) = }{VARIABLE, $x}
+ 104) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print ((1.02)+((0+0))) = ,$x
+ 105) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 13 :  print ((1.02)+((0+0))) = ,$x
+ 106) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  ((1.02)+((0+0))) =
+ 107) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $x successfully printed:  1,02
+ 108) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 13  is done
+ 109) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 14 : set $y = ((2)+($x+1))*((0)+(5))
+ 110) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+ 111) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $y
+ 112) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: ((2)+($x+1))*((0)+(5))
+ 113) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {LEFT_BRACKET, (}{LEFT_BRACKET, (}{NUMBER_LITERAL, 2}{RIGHT_BRACKET, )}{OPERATION, +}{LEFT_BRACKET, (}{VARIABLE, $x}{OPERATION, +}{NUMBER_LITERAL, 1}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}{OPERATION, *}{LEFT_BRACKET, (}{LEFT_BRACKET, (}{NUMBER_LITERAL, 0}{RIGHT_BRACKET, )}{OPERATION, +}{LEFT_BRACKET, (}{NUMBER_LITERAL, 5}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}
+ 114) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: ((2,0)+(($x)+(1,0)))*((,0)+(5,0))
+ 115) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $y = ((2,0)+(($x)+(1,0)))*((,0)+(5,0))
+ 116) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 14 :  set $y = ((2,0)+(($x)+(1,0)))*((,0)+(5,0))
+ 117) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $y
+ 118) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $y
+ 119) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 120) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 15 : print "$x=",$x, " => ((2)+($x+1))*((0)+(5))=",$y
+ 121) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 122) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "$x=",$x, " => ((2)+($x+1))*((0)+(5))=",$y
+ 123) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, $x=}{VARIABLE, $x}{STRING_LITERAL,  => ((2)+($x+1))*((0)+(5))=}{VARIABLE, $y}
+ 124) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print $x=,$x, => ((2)+($x+1))*((0)+(5))=,$y
+ 125) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 15 :  print $x=,$x, => ((2)+($x+1))*((0)+(5))=,$y
+ 126) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  $x=
+ 127) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $x successfully printed:  1,02
+ 128) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:   => ((2)+($x+1))*((0)+(5))=
+ 129) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $y successfully printed:  20,1
+ 130) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 15  is done
+ 131) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 16 : set $z = ((((((1))))))
+ 132) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+ 133) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $z
+ 134) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: ((((((1))))))
+ 135) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {LEFT_BRACKET, (}{LEFT_BRACKET, (}{LEFT_BRACKET, (}{LEFT_BRACKET, (}{LEFT_BRACKET, (}{LEFT_BRACKET, (}{NUMBER_LITERAL, 1}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}
+ 136) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: 1,0
+ 137) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $z = 1,0
+ 138) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 16 :  set $z = 1,0
+ 139) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $z
+ 140) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $z
+ 141) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 142) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 17 : print "((((((1))))))=",$z
+ 143) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 144) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "((((((1))))))=",$z
+ 145) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, ((((((1))))))=}{VARIABLE, $z}
+ 146) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print ((((((1))))))=,$z
+ 147) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 17 :  print ((((((1))))))=,$z
+ 148) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  ((((((1))))))=
+ 149) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $z successfully printed:  1,0
+ 150) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 17  is done
+ 151) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 18 : print ""
+ 152) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 153) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: ""
+ 154) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+ 155) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print
+ 156) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 18 :  print
+ 157) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+ 158) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 18  is done
+ 159) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 20 : # Пример чуть посложнее
+ 160) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: #comment
+ 161) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: #comment
+ 162) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.CommentCmdInterpreter]: Interpreting command # 20 :  #comment
+ 163) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 21 : print "[ Пример работы с функциональными вложенными выражениями ]"
+ 164) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 165) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "[ Пример работы с функциональными вложенными выражениями ]"
+ 166) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Пример работы с функциональными вложенными выражениями ]}
+ 167) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print [ Пример работы с функциональными вложенными выражениями ]
+ 168) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 21 :  print [ Пример работы с функциональными вложенными выражениями ]
+ 169) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Пример работы с функциональными вложенными выражениями ]
+ 170) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 21  is done
+ 171) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 22 : set $total = $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11)
+ 172) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+ 173) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $total
+ 174) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11)
+ 175) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {VARIABLE, $x}{OPERATION, *}{NUMBER_LITERAL, 21}{OPERATION, +}{NUMBER_LITERAL, 13}{OPERATION, *}{FUNCTION, tg}{LEFT_BRACKET, (}{VARIABLE, $y}{OPERATION, +}{NUMBER_LITERAL, 11}{RIGHT_BRACKET, )}{OPERATION, /}{NUMBER_LITERAL, 15}{OPERATION, -}{NUMBER_LITERAL, 14}{OPERATION, *}{VARIABLE, $z}{OPERATION, /}{NUMBER_LITERAL, 11}{OPERATION, -}{FUNCTION, ln}{LEFT_BRACKET, (}{VARIABLE, $y}{OPERATION, +}{NUMBER_LITERAL, 11}{RIGHT_BRACKET, )}
+ 176) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: (((($x)*(21,0))+((13,0)*((tg(($y)+(11,0)))/(15,0))))-((14,0)*(($z)/(11,0))))-(ln(($y)+(11,0)))
+ 177) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $total = (((($x)*(21,0))+((13,0)*((tg(($y)+(11,0)))/(15,0))))-((14,0)*(($z)/(11,0))))-(ln(($y)+(11,0)))
+ 178) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 22 :  set $total = (((($x)*(21,0))+((13,0)*((tg(($y)+(11,0)))/(15,0))))-((14,0)*(($z)/(11,0))))-(ln(($y)+(11,0)))
+ 179) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $total
+ 180) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $total
+ 181) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 182) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 23 : print "$x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = ", $total
+ 183) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 184) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "$x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = ", $total
+ 185) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = }{VARIABLE, $total}
+ 186) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = ,$total
+ 187) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 23 :  print $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) = ,$total
+ 188) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  $x * 21 + 13 * tg ( $y + 11 ) / 15 - 14 * $z / 11 - ln($y + 11) =
+ 189) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $total successfully printed:  16,4268
+ 190) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 23  is done
+ 191) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 24 : print ""
+ 192) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 193) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: ""
+ 194) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+ 195) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print
+ 196) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 24 :  print
+ 197) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+ 198) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 24  is done
+ 199) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 26 : print "[ Пример работы с аргументами коммандной строки ]"
+ 200) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 201) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "[ Пример работы с аргументами коммандной строки ]"
+ 202) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Пример работы с аргументами коммандной строки ]}
+ 203) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print [ Пример работы с аргументами коммандной строки ]
+ 204) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 26 :  print [ Пример работы с аргументами коммандной строки ]
+ 205) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Пример работы с аргументами коммандной строки ]
+ 206) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 26  is done
+ 207) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 27 : set $pi = arg(0)
+ 208) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+ 209) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $pi
+ 210) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: arg(0)
+ 211) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, arg}{LEFT_BRACKET, (}{NUMBER_LITERAL, 0}{RIGHT_BRACKET, )}
+ 212) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: arg(,0)
+ 213) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $pi = arg(,0)
+ 214) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 27 :  set $pi = arg(,0)
+ 215) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $pi
+ 216) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $pi
+ 217) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 218) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 28 : set $minus_1 = arg(1)
+ 219) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+ 220) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $minus_1
+ 221) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: arg(1)
+ 222) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, arg}{LEFT_BRACKET, (}{NUMBER_LITERAL, 1}{RIGHT_BRACKET, )}
+ 223) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: arg(1,0)
+ 224) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $minus_1 = arg(1,0)
+ 225) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 28 :  set $minus_1 = arg(1,0)
+ 226) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $minus_1
+ 227) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $minus_1
+ 228) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 229) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 29 : set $res = $pi*$minus_1
+ 230) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: set
+ 231) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	lvalue detected: $res
+ 232) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	rvalue detected: $pi*$minus_1
+ 233) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {VARIABLE, $pi}{OPERATION, *}{VARIABLE, $minus_1}
+ 234) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	expression parsed: ($pi)*($minus_1)
+ 235) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: set $res = ($pi)*($minus_1)
+ 236) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 29 :  set $res = ($pi)*($minus_1)
+ 237) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $res
+ 238) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $res
+ 239) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 240) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 30 : print "Умножаем значения второго и третьего аргумента командной строки:", $res
+ 241) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 242) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "Умножаем значения второго и третьего аргумента командной строки:", $res
+ 243) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Умножаем значения второго и третьего аргумента командной строки:}{VARIABLE, $res}
+ 244) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print Умножаем значения второго и третьего аргумента командной строки:,$res
+ 245) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 30 :  print Умножаем значения второго и третьего аргумента командной строки:,$res
+ 246) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  Умножаем значения второго и третьего аргумента командной строки:
+ 247) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $res successfully printed:  -3,1416
+ 248) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 30  is done
+ 249) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 31 : print ""
+ 250) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 251) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: ""
+ 252) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+ 253) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print
+ 254) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 31 :  print
+ 255) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+ 256) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 31  is done
+ 257) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 33 : print "[ Тест основного логарифмического тождества ]"
+ 258) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: print
+ 259) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "[ Тест основного логарифмического тождества ]"
+ 260) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Тест основного логарифмического тождества ]}
+ 261) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: print [ Тест основного логарифмического тождества ]
+ 262) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 33 :  print [ Тест основного логарифмического тождества ]
+ 263) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Тест основного логарифмического тождества ]
+ 264) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 33  is done
+ 265) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: Analyze command # 34 : input "Введите число для экспоненциального теста", $exp_test
+ 266) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	Type detected: input
+ 267) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	params detected: "Введите число для экспоненциального теста", $exp_test
+ 268) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Введите число для экспоненциального теста}{VARIABLE, $exp_test}
+ 269) INFO 22.12.2021 10:59:21.5921 [class service.lexer.LexicalParser]: 	command compiled: input Введите число для экспоненциального теста,$exp_test
+ 270) INFO 22.12.2021 10:59:21.5921 [class service.interpreter.commands.InputCmdInterpreter]: Interpreting command # 34 :  input Введите число для экспоненциального теста,$exp_test
+ 271) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.InputCmdInterpreter]: 	User input successfully saved in variable $exp_test
+ 272) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.InputCmdInterpreter]: Command # 34  is done
+ 273) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: Analyze command # 35 : set $res = ln(exp($exp_test))
+ 274) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	Type detected: set
+ 275) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	lvalue detected: $res
+ 276) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	rvalue detected: ln(exp($exp_test))
+ 277) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, ln}{LEFT_BRACKET, (}{FUNCTION, exp}{LEFT_BRACKET, (}{VARIABLE, $exp_test}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}
+ 278) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	expression parsed: ln(exp($exp_test))
+ 279) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command compiled: set $res = ln(exp($exp_test))
+ 280) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 35 :  set $res = ln(exp($exp_test))
+ 281) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $res
+ 282) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $res
+ 283) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 284) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: Analyze command # 36 : print "LN(EXP(",$exp_test,")) = ",$exp_test
+ 285) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	Type detected: print
+ 286) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	params detected: "LN(EXP(",$exp_test,")) = ",$exp_test
+ 287) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, LN(EXP(}{VARIABLE, $exp_test}{STRING_LITERAL, )) = }{VARIABLE, $exp_test}
+ 288) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command compiled: print LN(EXP(,$exp_test,)) = ,$exp_test
+ 289) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 36 :  print LN(EXP(,$exp_test,)) = ,$exp_test
+ 290) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  LN(EXP(
+ 291) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $exp_test successfully printed:  13,0
+ 292) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  )) =
+ 293) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $exp_test successfully printed:  13,0
+ 294) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 36  is done
+ 295) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: Analyze command # 37 : print ""
+ 296) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	Type detected: print
+ 297) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	params detected: ""
+ 298) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+ 299) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command compiled: print
+ 300) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 37 :  print
+ 301) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+ 302) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 37  is done
+ 303) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: Analyze command # 39 : print "[ Тест основного тригонометрического тождества тождества ]"
+ 304) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	Type detected: print
+ 305) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	params detected: "[ Тест основного тригонометрического тождества тождества ]"
+ 306) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Тест основного тригонометрического тождества тождества ]}
+ 307) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command compiled: print [ Тест основного тригонометрического тождества тождества ]
+ 308) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 39 :  print [ Тест основного тригонометрического тождества тождества ]
+ 309) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Тест основного тригонометрического тождества тождества ]
+ 310) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 39  is done
+ 311) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: Analyze command # 40 : input "Введите значение произвольного угла, град.", $test_angle
+ 312) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	Type detected: input
+ 313) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	params detected: "Введите значение произвольного угла, град.", $test_angle
+ 314) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Введите значение произвольного угла, град.}{VARIABLE, $test_angle}
+ 315) INFO 22.12.2021 10:59:40.5940 [class service.lexer.LexicalParser]: 	command compiled: input Введите значение произвольного угла, град.,$test_angle
+ 316) INFO 22.12.2021 10:59:40.5940 [class service.interpreter.commands.InputCmdInterpreter]: Interpreting command # 40 :  input Введите значение произвольного угла, град.,$test_angle
+ 317) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.InputCmdInterpreter]: 	User input successfully saved in variable $test_angle
+ 318) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.InputCmdInterpreter]: Command # 40  is done
+ 319) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 41 : set $angle_rad = rad($test_angle)
+ 320) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: set
+ 321) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	lvalue detected: $angle_rad
+ 322) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	rvalue detected: rad($test_angle)
+ 323) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, rad}{LEFT_BRACKET, (}{VARIABLE, $test_angle}{RIGHT_BRACKET, )}
+ 324) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	expression parsed: rad($test_angle)
+ 325) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: set $angle_rad = rad($test_angle)
+ 326) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 41 :  set $angle_rad = rad($test_angle)
+ 327) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $angle_rad
+ 328) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $angle_rad
+ 329) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 330) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 42 : print "Значение угла в радианах, рад.: ", $angle_rad
+ 331) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: print
+ 332) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	params detected: "Значение угла в радианах, рад.: ", $angle_rad
+ 333) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Значение угла в радианах, рад.: }{VARIABLE, $angle_rad}
+ 334) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: print Значение угла в радианах, рад.: ,$angle_rad
+ 335) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 42 :  print Значение угла в радианах, рад.: ,$angle_rad
+ 336) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  Значение угла в радианах, рад.:
+ 337) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,7854
+ 338) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 42  is done
+ 339) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 43 : set $res = sin($angle_rad)*sin($angle_rad)+cos($angle_rad)*cos($angle_rad)
+ 340) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: set
+ 341) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	lvalue detected: $res
+ 342) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	rvalue detected: sin($angle_rad)*sin($angle_rad)+cos($angle_rad)*cos($angle_rad)
+ 343) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, sin}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}{OPERATION, *}{FUNCTION, sin}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}{OPERATION, +}{FUNCTION, cos}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}{OPERATION, *}{FUNCTION, cos}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}
+ 344) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	expression parsed: ((sin($angle_rad))*(sin($angle_rad)))+((cos($angle_rad))*(cos($angle_rad)))
+ 345) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: set $res = ((sin($angle_rad))*(sin($angle_rad)))+((cos($angle_rad))*(cos($angle_rad)))
+ 346) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 43 :  set $res = ((sin($angle_rad))*(sin($angle_rad)))+((cos($angle_rad))*(cos($angle_rad)))
+ 347) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $res
+ 348) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $res
+ 349) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 350) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 44 : print "sin(", $angle_rad , ")^2+cos(" , $angle_rad , ")^2 = ", $res
+ 351) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: print
+ 352) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	params detected: "sin(", $angle_rad , ")^2+cos(" , $angle_rad , ")^2 = ", $res
+ 353) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, sin(}{VARIABLE, $angle_rad}{STRING_LITERAL, )^2+cos(}{VARIABLE, $angle_rad}{STRING_LITERAL, )^2 = }{VARIABLE, $res}
+ 354) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: print sin(,$angle_rad,)^2+cos(,$angle_rad,)^2 = ,$res
+ 355) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 44 :  print sin(,$angle_rad,)^2+cos(,$angle_rad,)^2 = ,$res
+ 356) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  sin(
+ 357) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,7854
+ 358) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  )^2+cos(
+ 359) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,7854
+ 360) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  )^2 =
+ 361) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $res successfully printed:  1,0
+ 362) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 44  is done
+ 363) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 45 : print ""
+ 364) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: print
+ 365) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	params detected: ""
+ 366) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+ 367) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: print
+ 368) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 45 :  print
+ 369) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+ 370) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 45  is done
+ 371) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 47 : print "[ Тест формулы тангенса двойного угла ]"
+ 372) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: print
+ 373) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	params detected: "[ Тест формулы тангенса двойного угла ]"
+ 374) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Тест формулы тангенса двойного угла ]}
+ 375) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: print [ Тест формулы тангенса двойного угла ]
+ 376) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 47 :  print [ Тест формулы тангенса двойного угла ]
+ 377) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Тест формулы тангенса двойного угла ]
+ 378) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 47  is done
+ 379) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: Analyze command # 48 : input "Введите значение произвольного угла, град.", $test_angle
+ 380) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	Type detected: input
+ 381) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	params detected: "Введите значение произвольного угла, град.", $test_angle
+ 382) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Введите значение произвольного угла, град.}{VARIABLE, $test_angle}
+ 383) INFO 22.12.2021 10:59:48.5948 [class service.lexer.LexicalParser]: 	command compiled: input Введите значение произвольного угла, град.,$test_angle
+ 384) INFO 22.12.2021 10:59:48.5948 [class service.interpreter.commands.InputCmdInterpreter]: Interpreting command # 48 :  input Введите значение произвольного угла, град.,$test_angle
+ 385) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.InputCmdInterpreter]: 	User input successfully saved in variable $test_angle
+ 386) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.InputCmdInterpreter]: Command # 48  is done
+ 387) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 49 : set $angle_rad = rad($test_angle)
+ 388) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: set
+ 389) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	lvalue detected: $angle_rad
+ 390) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	rvalue detected: rad($test_angle)
+ 391) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, rad}{LEFT_BRACKET, (}{VARIABLE, $test_angle}{RIGHT_BRACKET, )}
+ 392) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	expression parsed: rad($test_angle)
+ 393) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: set $angle_rad = rad($test_angle)
+ 394) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 49 :  set $angle_rad = rad($test_angle)
+ 395) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $angle_rad
+ 396) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $angle_rad
+ 397) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 398) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 50 : print "Значение угла в радианах, рад.: ", $angle_rad
+ 399) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: print
+ 400) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	params detected: "Значение угла в радианах, рад.: ", $angle_rad
+ 401) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Значение угла в радианах, рад.: }{VARIABLE, $angle_rad}
+ 402) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: print Значение угла в радианах, рад.: ,$angle_rad
+ 403) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 50 :  print Значение угла в радианах, рад.: ,$angle_rad
+ 404) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  Значение угла в радианах, рад.:
+ 405) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,5236
+ 406) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 50  is done
+ 407) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 51 : set $double_angle_rad = 2*$angle_rad
+ 408) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: set
+ 409) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	lvalue detected: $double_angle_rad
+ 410) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	rvalue detected: 2*$angle_rad
+ 411) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {NUMBER_LITERAL, 2}{OPERATION, *}{VARIABLE, $angle_rad}
+ 412) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	expression parsed: (2,0)*($angle_rad)
+ 413) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: set $double_angle_rad = (2,0)*($angle_rad)
+ 414) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 51 :  set $double_angle_rad = (2,0)*($angle_rad)
+ 415) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $double_angle_rad
+ 416) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $double_angle_rad
+ 417) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 418) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 52 : print "Значение двойного угла в радианах, рад.: ", $double_angle_rad
+ 419) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: print
+ 420) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	params detected: "Значение двойного угла в радианах, рад.: ", $double_angle_rad
+ 421) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, Значение двойного угла в радианах, рад.: }{VARIABLE, $double_angle_rad}
+ 422) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: print Значение двойного угла в радианах, рад.: ,$double_angle_rad
+ 423) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 52 :  print Значение двойного угла в радианах, рад.: ,$double_angle_rad
+ 424) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  Значение двойного угла в радианах, рад.:
+ 425) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $double_angle_rad successfully printed:  1,0472
+ 426) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 52  is done
+ 427) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 53 : set $tg_double_angle = tg($double_angle_rad)
+ 428) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: set
+ 429) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	lvalue detected: $tg_double_angle
+ 430) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	rvalue detected: tg($double_angle_rad)
+ 431) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, tg}{LEFT_BRACKET, (}{VARIABLE, $double_angle_rad}{RIGHT_BRACKET, )}
+ 432) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	expression parsed: tg($double_angle_rad)
+ 433) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: set $tg_double_angle = tg($double_angle_rad)
+ 434) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 53 :  set $tg_double_angle = tg($double_angle_rad)
+ 435) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $tg_double_angle
+ 436) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $tg_double_angle
+ 437) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 438) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 54 : print "tg(2*", $angle_rad,") = ",$tg_double_angle
+ 439) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: print
+ 440) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	params detected: "tg(2*", $angle_rad,") = ",$tg_double_angle
+ 441) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, tg(2*}{VARIABLE, $angle_rad}{STRING_LITERAL, ) = }{VARIABLE, $tg_double_angle}
+ 442) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: print tg(2*,$angle_rad,) = ,$tg_double_angle
+ 443) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 54 :  print tg(2*,$angle_rad,) = ,$tg_double_angle
+ 444) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  tg(2*
+ 445) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,5236
+ 446) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  ) =
+ 447) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $tg_double_angle successfully printed:  1,7321
+ 448) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 54  is done
+ 449) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 55 : set $tg_double_angle2 = 2*tg($angle_rad)/(1 - tg($angle_rad)*tg($angle_rad))
+ 450) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: set
+ 451) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	lvalue detected: $tg_double_angle2
+ 452) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	rvalue detected: 2*tg($angle_rad)/(1 - tg($angle_rad)*tg($angle_rad))
+ 453) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {NUMBER_LITERAL, 2}{OPERATION, *}{FUNCTION, tg}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}{OPERATION, /}{LEFT_BRACKET, (}{NUMBER_LITERAL, 1}{OPERATION, -}{FUNCTION, tg}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}{OPERATION, *}{FUNCTION, tg}{LEFT_BRACKET, (}{VARIABLE, $angle_rad}{RIGHT_BRACKET, )}{RIGHT_BRACKET, )}
+ 454) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	expression parsed: (2,0)*((tg($angle_rad))/((1,0)-((tg($angle_rad))*(tg($angle_rad)))))
+ 455) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: set $tg_double_angle2 = (2,0)*((tg($angle_rad))/((1,0)-((tg($angle_rad))*(tg($angle_rad)))))
+ 456) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 55 :  set $tg_double_angle2 = (2,0)*((tg($angle_rad))/((1,0)-((tg($angle_rad))*(tg($angle_rad)))))
+ 457) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $tg_double_angle2
+ 458) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value calculated:  $tg_double_angle2
+ 459) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable value successfully saved in the context
+ 460) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 56 : print "2*tg(", $angle_rad,")/(1-tg(",$angle_rad,")^2) = ",$tg_double_angle2
+ 461) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: print
+ 462) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	params detected: "2*tg(", $angle_rad,")/(1-tg(",$angle_rad,")^2) = ",$tg_double_angle2
+ 463) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, 2*tg(}{VARIABLE, $angle_rad}{STRING_LITERAL, )/(1-tg(}{VARIABLE, $angle_rad}{STRING_LITERAL, )^2) = }{VARIABLE, $tg_double_angle2}
+ 464) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: print 2*tg(,$angle_rad,)/(1-tg(,$angle_rad,)^2) = ,$tg_double_angle2
+ 465) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 56 :  print 2*tg(,$angle_rad,)/(1-tg(,$angle_rad,)^2) = ,$tg_double_angle2
+ 466) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  2*tg(
+ 467) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,5236
+ 468) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  )/(1-tg(
+ 469) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $angle_rad successfully printed:  0,5236
+ 470) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  )^2) =
+ 471) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	variable $tg_double_angle2 successfully printed:  1,7321
+ 472) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 56  is done
+ 473) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 58 : print ""
+ 474) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: print
+ 475) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	params detected: ""
+ 476) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, }
+ 477) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: print
+ 478) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 58 :  print
+ 479) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:
+ 480) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 58  is done
+ 481) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 59 : print "[ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]"
+ 482) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: print
+ 483) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	params detected: "[ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]"
+ 484) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {STRING_LITERAL, [ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]}
+ 485) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: print [ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]
+ 486) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Interpreting command # 59 :  print [ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]
+ 487) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: 	literal successfully printed:  [ Вызываем ошибку, получая значение строковой переменной через функцию arg(3) ]
+ 488) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.PrintCmdInterpreterImpl]: Command # 59  is done
+ 489) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: Analyze command # 60 : set $wrong_value = arg(2)
+ 490) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	Type detected: set
+ 491) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	lvalue detected: $wrong_value
+ 492) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	rvalue detected: arg(2)
+ 493) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command tokenized: {FUNCTION, arg}{LEFT_BRACKET, (}{NUMBER_LITERAL, 2}{RIGHT_BRACKET, )}
+ 494) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	expression parsed: arg(2,0)
+ 495) INFO 22.12.2021 10:59:52.5952 [class service.lexer.LexicalParser]: 	command compiled: set $wrong_value = arg(2,0)
+ 496) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: Interpreting command # 60 :  set $wrong_value = arg(2,0)
+ 497) INFO 22.12.2021 10:59:52.5952 [class service.interpreter.commands.SetCmdInterpreterImpl]: 	variable detected:  $wrong_value
+ 498) ERROR 22.12.2021 10:59:52.5952 [class repository.CmdLineArgumentRepo]: Parameter #2 ("abc") can't be represented as decimal value
+ 499) ERROR 22.12.2021 10:59:52.5952 [class service.interpreter.ExpressionInterpreterImpl]: Error in calculation: arg(2,0)
+ 500) ERROR 22.12.2021 10:59:52.5952 [class service.interpreter.ExpressionInterpreterImpl]: 	java.lang.IllegalStateException: Parameter #2 ("abc") can't be represented as decimal value
+	at repository.CmdLineArgumentRepo.getById(CmdLineArgumentRepo.java:43)
+	at repository.CmdLineArgumentRepo.lambda$getFunctionDelegate$0(CmdLineArgumentRepo.java:49)
+	at service.interpreter.ExpressionInterpreterImpl.interpretFunction(ExpressionInterpreterImpl.java:53)
+	at service.interpreter.ExpressionInterpreterImpl.interpretExpression(ExpressionInterpreterImpl.java:102)
+	at service.interpreter.commands.SetCmdInterpreterImpl.interpretCommand(SetCmdInterpreterImpl.java:30)
+	at service.manager.ScriptManager.processCommand(ScriptManager.java:84)
+	at service.manager.ScriptManager.run(ScriptManager.java:106)
+	at Main.main(Main.java:110)
+
+ 501) ERROR 22.12.2021 10:59:52.5952 [class service.manager.ScriptManager]:
+!Unexpected error at line #60: Error in calculation: arg(2,0)
+ 502) ERROR 22.12.2021 10:59:52.5952 [class service.manager.ScriptManager]: 	java.lang.ArithmeticException: Error in calculation: arg(2,0)
+	at service.interpreter.ExpressionInterpreterImpl.interpretFunction(ExpressionInterpreterImpl.java:57)
+	at service.interpreter.ExpressionInterpreterImpl.interpretExpression(ExpressionInterpreterImpl.java:102)
+	at service.interpreter.commands.SetCmdInterpreterImpl.interpretCommand(SetCmdInterpreterImpl.java:30)
+	at service.manager.ScriptManager.processCommand(ScriptManager.java:84)
+	at service.manager.ScriptManager.run(ScriptManager.java:106)
+	at Main.main(Main.java:110)
+
+ 503) INFO 22.12.2021 10:59:59.5959 [class service.lexer.LexicalParser]: Analyze command # 61 : trace
+ 504) INFO 22.12.2021 10:59:59.5959 [class service.lexer.LexicalParser]: 	Type detected: trace
+ 505) INFO 22.12.2021 10:59:59.5959 [class service.lexer.LexicalParser]: 	command compiled: trace
+ 506) INFO 22.12.2021 10:59:59.5959 [class service.interpreter.commands.TraceCmdInterpreterImp]: Interpreting command # 61 :  trace
+
+
+asi> help
+USER HELP INFORMATION
+---------------------
+
+Supported data types are:
+STRING LITERAL : Sequence of chars between quotes. Formatting rule: "{[char]..}". For example: "literal string"
+NUMBER LITERAL : Sequence of digits without delimiters with one decimal point. Formatting rule: "{[0-9]..}.{[0-9]..}". For example: 235.54
+VARIABLE : Sequence of letters (incl. subscript) and digits without delimiters and spaces followed after the dollar symbol ('$'). First char after '$' should be a letter.. Formatting rule: ${[char]..}. For example: $variable
+FUNCTION SUB-EXPRESSION : String representation of the functional sub-expression according to its format. Formatting rule: See separate topic. For example: See separate topic
+
+Interpreter supports the following operations:
++ : Summing operation (priority = 2). Format: <arg #1 | expression #1> %c <arg #2 | expression #2>
+- : Subtracting operation (priority = 2). Format: <arg #1 | expression #1> %c <arg #2 | expression #2>
+* : Multiplication operation (priority = 1). Format: <arg #1 | expression #1> %c <arg #2 | expression #2>
+/ : Division operation (priority = 1). Format: <arg #1 | expression #1> %c <arg #2 | expression #2>
+
+Interpreter supports the following list of functions:
+EXP : Exponential function. For example: exp($x+1)
+LN : Logarithmic function. For example: ln(20+$y)
+RAD : Converts angle value from degrees to radians. For example: rad(30)
+TG : Trigonometrical tangent function. For example: tg(5/$z)
+CTG : Trigonometrical co-tangent function. For example: ctg(rad(45))
+SIN : Trigonometrical sinus function. For example: sin(rad(60)/2)
+COS : Trigonometrical cosine function. For example: cos(3*rad(30))
+ARG : Gets command line argument by index and returns its decimal value (if possible). For example: arg($x)
+
+Formatting rule: every function call has to be formatted as a functional sub-expression: <function name>(<number literal|variable>)
+---
+asi> quite
+
+Process finished with exit code 0
