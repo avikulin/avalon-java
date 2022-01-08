@@ -1,8 +1,8 @@
-import UI.MainWindow;
+import UI.TableNavigatorUI;
 
 public class Main {
     public static void main(String[] args) {
-        MainWindow wnd = new MainWindow();
+        TableNavigatorUI wnd = new TableNavigatorUI();
         wnd.setVisible(true);
     }
 }
