@@ -13,9 +13,11 @@ import static constants.Constants.*;
 
 public class TokenFabricImpl implements TokenFabric {
     private Pattern variableMatcher;
+    private Pattern decimalMatcher;
 
     public TokenFabricImpl() {
         variableMatcher = Pattern.compile("^\\$[a-zA-Z](\\w*)$");
+        decimalMatcher = Pattern.compile("-?\\d+(\\.\\d+)?");
     }
 
     @Override
@@ -68,8 +70,8 @@ public class TokenFabricImpl implements TokenFabric {
             return createRBracketToken(source);
         }
 
-        //числовой литерал: начинается с цифры
-        if (Character.isDigit(firstChar)) {
+        //числовой литерал: ####.##,####,-####.##,-####
+        if (decimalMatcher.matcher(source).matches()) {
             return createNumberLiteralToken(source);
         }
 
