@@ -10,7 +10,7 @@ import java.util.List;
 import static constants.Constants.*;
 
 public class SequenceTokenizer implements Tokenizer {
-    private final TokenFabric classifier;
+    private TokenFabric classifier;
 
     public SequenceTokenizer(TokenFabric classifier) {
         if (classifier == null){
@@ -49,10 +49,17 @@ public class SequenceTokenizer implements Tokenizer {
         if (nextStartPos < sourceLength) {
             String lastToken = source.substring(nextStartPos, sourceLength + 1);
             res.add(classifier.detect(lastToken.trim()));
-        } else {
-            String msg = "Incorrect number of commas: ".concat(source);
-            throw new IllegalStateException(msg);
         }
+
+        /*// не встретилось ни одной запятаи
+        if (nextStartPos == RESULT_NOT_FOUND){
+            res.add(classifier.detect(source.trim()));
+        }
+*/
+/*        String[] exprParts = source.split(Character.toString(SEPARATOR_COMMA_SYMBOL));
+        for (String s : exprParts) {
+            res.add(classifier.detect(s.trim()));
+        }*/
 
         return res;
     }

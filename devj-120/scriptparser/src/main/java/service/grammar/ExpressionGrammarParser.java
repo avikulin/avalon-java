@@ -119,7 +119,7 @@ public class ExpressionGrammarParser implements GrammarAnalyzer {
          *                                                               ^
          *                                                               | рекуррентный случай (углубляем рекурсию)
          *
-         * б) пришла функция(первым токеном идет функция, потом подвыражение в скобказ):<--рекуррентный случай
+         * б) пришлая функция(первым токеном идет функция, потом подвыражение в скобказ):<--рекуррентный случай
          *                                                               sin($x+1),
          *                                                               tg($y),
          *                                                               cos(5.2)
@@ -218,7 +218,7 @@ public class ExpressionGrammarParser implements GrammarAnalyzer {
             }
         }
 
-        String msg = "Expression string passed have invalid operation formatting between pos. %d and pos. %d";
+        String msg = "Expression string passed have invalid operation formatting between pos. %d and pos %d";
         throw new IllegalArgumentException(String.format(msg, startPos, endPos));
     }
 

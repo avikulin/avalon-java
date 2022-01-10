@@ -86,11 +86,6 @@ public class Command implements Statement, Iterable<Expression> {
     }
 
     @Override
-    public int getRValueLength() {
-        return rvalue.size();
-    }
-
-    @Override
     public boolean hasRValue() {
         return rvalue.size() > 0;
     }

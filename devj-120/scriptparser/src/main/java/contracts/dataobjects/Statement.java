@@ -9,6 +9,5 @@ public interface Statement extends Iterable<Expression> {
     boolean hasLValue();
     void addRvalue(Expression node);
     Expression getRValue(int id);
-    int getRValueLength();
     boolean hasRValue();
 }

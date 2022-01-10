@@ -24,12 +24,8 @@ public class LexicalParser implements LexicalAnalyzer {
     private final GrammarFabric grammars;
     private final TokenizerFabric tokenizers;
 
-    public LexicalParser(TokenizerFabric tokenizer, GrammarFabric grammars) {
-        if (tokenizer == null || grammars == null){
-            throw new IllegalArgumentException("Tokenizer and grammar fabric reference params are mandatory");
-        }
-
-        this.tokenizers = tokenizer;
+    public LexicalParser(TokenizerFabric tokenizes, GrammarFabric grammars) {
+        this.tokenizers = tokenizes;
         this.grammars = grammars;
     }
 
@@ -51,7 +47,7 @@ public class LexicalParser implements LexicalAnalyzer {
         StringTokenizer literalTokenizer = new StringTokenizer(sourceText);
         String cmdToken = literalTokenizer.nextToken();
         if (cmdToken == null||cmdToken.isEmpty()){
-            String msg = String.format("Wrong format of the command at line #%d", cmdId);
+            String msg = String.format("Wrong format of the command at line #", cmdId);
             logger.logError(this.getClass(), msg);
             throw new IllegalArgumentException();
         }
