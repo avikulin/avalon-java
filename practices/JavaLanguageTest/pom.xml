@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>scriptparser</artifactId>
+    <artifactId>JavaLanguageTest</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourveCodeEncoding>UTF-8</project.build.sourveCodeEncoding>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.4.0</version>
-            <scope>test</scope>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.18.1</version>
         </dependency>
     </dependencies>
     <build>
@@ -28,11 +27,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.0</version>
             </plugin>
         </plugins>
     </build>

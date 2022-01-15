@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employeeReport" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e3db46ea-1a91-4344-8697-c7ab708fa049">
+	<parameter name="title" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="condition" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[" 1 = 1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="minSalary" class="java.lang.Double" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT * FROM EMPLOYEE WHERE SALARY >= $P{minSalary} AND $P!{condition}]]>
+	</queryString>
+	<field name="FIRST_NAME" class="java.lang.String"/>
+	<field name="LAST_NAME" class="java.lang.String"/>
+	<field name="SALARY" class="java.lang.Double"/>
+	<field name="ID" class="java.lang.Integer"/>
+	<title>
+		<band height="20" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="47" splitType="Stretch"/>
+	</detail>
+</jasperReport>
