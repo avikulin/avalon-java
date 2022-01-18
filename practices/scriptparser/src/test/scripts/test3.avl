@@ -1,1 +1,2 @@
 set $tg_double_angle2 = 2*tg(0.523599)/(1 - tg(0.523599)*tg(0.523599))
+print $tg_double_angle2

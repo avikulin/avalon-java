@@ -67,8 +67,12 @@ public class ExpressionTokenizer implements Tokenizer {
                     */
 
                     boolean subSequenceIsEmpty = source.substring(prevTokenRightBound+1, i).trim().isEmpty();
-                    if ((prevTokenType == TokenType.RIGHT_BRACKET || prevTokenType == TokenType.LEFT_BRACKET ||
-                        prevTokenType == TokenType.OPERATION) && !subSequenceIsEmpty){
+                    if (
+                            (
+                                prevTokenType == null || prevTokenType == TokenType.RIGHT_BRACKET ||
+                                prevTokenType == TokenType.LEFT_BRACKET || prevTokenType == TokenType.OPERATION
+                            ) && !subSequenceIsEmpty
+                    ){
 
                         ExtractSubSequence(source, prevTokenRightBound, i, res);
                         prevTokenRightBound = i;
