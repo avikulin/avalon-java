@@ -8,22 +8,25 @@ import utils.Tracer;
 import utils.ValueConverter;
 
 import java.math.BigInteger;
-import java.util.*;
-
-import static constants.Constants.ZERO_VALUE;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.NoSuchElementException;
+import java.util.StringJoiner;
 
 public class CalcProcessor implements CalculationModel {
+    private static final BigInteger ZERO_VALUE = new BigInteger("0");
+
     CalculationMode mode;
     StringJoiner calculationLog;
     Deque<BigInteger> valueRegister;
     Deque<Operation> operationRegister;
     int operationCounter;
 
-    public CalcProcessor(CalculationMode mode)  throws IllegalArgumentException {
-        if (mode == null){
+    public CalcProcessor(CalculationMode mode) throws IllegalArgumentException {
+        if (mode == null) {
             String msg = "Calculation mode reference param must be not null";
             IllegalArgumentException exception = new IllegalArgumentException(msg);
-            Tracer.get().logError(this.getClass(),exception, "Constructor error");
+            Tracer.get().logError(this.getClass(), exception, "Constructor error");
             throw exception;
         }
 
@@ -68,7 +71,7 @@ public class CalcProcessor implements CalculationModel {
             try {
                 operationRegister.pop(); // забираем операцию на исполнение
                 BigInteger operand = valueRegister.pop();
-                BigInteger result = operation.getFunction().apply(operand, new BigInteger(ZERO_VALUE));
+                BigInteger result = operation.getFunction().apply(operand, ZERO_VALUE);
                 String strOperand = String.format("%s %s", mode, ValueConverter.toString(operand, mode));
                 String strOperation = operation.toString(strOperand);
                 String strResult = ValueConverter.toString(result, mode);
@@ -91,7 +94,7 @@ public class CalcProcessor implements CalculationModel {
                 BigInteger operandB = valueRegister.pop();
                 BigInteger operandA = valueRegister.pop();
 
-                if (operandB.equals(new BigInteger(ZERO_VALUE))&&operation==Operation.DIV){
+                if (operandB.equals(ZERO_VALUE) && operation == Operation.DIV) {
                     throw new ArithmeticException("Division by zero is prohibited");
                 }
 
@@ -169,7 +172,7 @@ public class CalcProcessor implements CalculationModel {
         Tracer.get().logInfo(this.getClass(), "Clear state & re-init calculation context");
         operationRegister.clear();
         valueRegister.clear();
-        valueRegister.push(new BigInteger(ZERO_VALUE));
+        valueRegister.push(ZERO_VALUE);
         addLogEntry("CLEAR STATE");
         addLogEntry("ENTER DEFAULT OPERAND: 0");
     }

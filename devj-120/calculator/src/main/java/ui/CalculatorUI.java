@@ -142,7 +142,8 @@ public class CalculatorUI extends JFrame {
     private void processOperation(Operation operation) {
         try {
             if (screen.isModifiedState()) {
-                calcProcessor.enterOperand(screen.getDisplayValue());
+                performCalculation();
+                //calcProcessor.enterOperand(screen.getDisplayValue());
             }
             String value = calcProcessor.enterOperation(operation);
             if (operation.getType() == OperationType.UNARY) {
@@ -153,6 +154,21 @@ public class CalculatorUI extends JFrame {
         } catch (IllegalArgumentException | IllegalStateException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void performCalculation() {
+        try {
+            calcProcessor.enterOperand(screen.getDisplayValue());
+            String res = calcProcessor.processCalculation();
+            screen.displayValue(res, true);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void resetState() {
+        calcProcessor.resetState();
+        screen.reset();
     }
 
     private void processMode(CalculationMode mode) {
@@ -171,21 +187,6 @@ public class CalculatorUI extends JFrame {
             Color color = (btn.getMode() == mode) ? Color.orange : standardColor;
             btn.setBackground(color);
         }
-    }
-
-    private void performCalculation() {
-        try {
-            calcProcessor.enterOperand(screen.getDisplayValue());
-            String res = calcProcessor.processCalculation();
-            screen.displayValue(res, true);
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void resetState() {
-        calcProcessor.resetState();
-        screen.reset();
     }
 
     public static void main(String[] args) {

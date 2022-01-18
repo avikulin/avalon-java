@@ -15,11 +15,14 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.URL;
 
-import static constants.Constants.*;
-
 public class JDisplayPane extends JLabel {
+    private static final String LCD_FONT_NAME = "lcd.ttf";
+    private static final String FONT_RESOURCE_DIR = "/fonts/";
     private static final String BLANK_STATE = "0";
     private static final String OVERFLOW_STATE = "DISPLAY OVERFLOW";
+    private static final int MAX_DIGITS_ON_DISPLAY = 18;
+    private static final String ZERO_VALUE = "0";
+
     private CalculationMode mode;
     private String displayValue;
     private boolean isInInitialState;

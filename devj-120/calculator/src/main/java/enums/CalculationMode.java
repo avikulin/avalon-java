@@ -1,12 +1,11 @@
 package enums;
 
-import static constants.Constants.*;
-
 public enum CalculationMode {
-    HEX(16, CALCULATION_MODE_HEX),
-    DEC(10, CALCULATION_MODE_DEC),
-    OCT(8, CALCULATION_MODE_OCT),
-    BIN(2, CALCULATION_MODE_BIN);
+
+    HEX(16, 0b01000),
+    DEC(10, 0b00100),
+    OCT(8, 0b00010),
+    BIN(2, 0b00001);
 
     private final int radix;
     private final int calculationModeMask;
@@ -20,7 +19,7 @@ public enum CalculationMode {
         return radix;
     }
 
-    public int getCalculationModeMask() {
+    public int getMask() {
         return calculationModeMask;
     }
 }

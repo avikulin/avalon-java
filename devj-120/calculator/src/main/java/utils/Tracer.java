@@ -1,6 +1,6 @@
 package utils;
 
-import interfaces.logging.DiagnosticLogger;
+import interfaces.DiagnosticLogger;
 import enums.EventType;
 
 import java.io.PrintWriter;

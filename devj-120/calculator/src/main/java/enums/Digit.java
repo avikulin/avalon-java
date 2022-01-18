@@ -1,24 +1,30 @@
 package enums;
 
-import static constants.Constants.*;
-
 public enum Digit {
-    DIGIT_A('A', CALCULATION_MODE_HEX),
-    DIGIT_B('B', CALCULATION_MODE_HEX),
-    DIGIT_C('C', CALCULATION_MODE_HEX),
-    DIGIT_D('D', CALCULATION_MODE_HEX),
-    DIGIT_E('E', CALCULATION_MODE_HEX),
-    DIGIT_F('F', CALCULATION_MODE_HEX),
-    DIGIT_0('0', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC | CALCULATION_MODE_BIN),
-    DIGIT_1('1', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC | CALCULATION_MODE_BIN),
-    DIGIT_2('2', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC),
-    DIGIT_3('3', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC),
-    DIGIT_4('4', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC),
-    DIGIT_5('5', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC),
-    DIGIT_6('6', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC),
-    DIGIT_7('7', CALCULATION_MODE_HEX | CALCULATION_MODE_OCT | CALCULATION_MODE_DEC),
-    DIGIT_8('8', CALCULATION_MODE_HEX | CALCULATION_MODE_DEC),
-    DIGIT_9('9', CALCULATION_MODE_HEX | CALCULATION_MODE_DEC);
+    DIGIT_A('A', CalculationMode.HEX.getMask()),
+    DIGIT_B('B', CalculationMode.HEX.getMask()),
+    DIGIT_C('C', CalculationMode.HEX.getMask()),
+    DIGIT_D('D', CalculationMode.HEX.getMask()),
+    DIGIT_E('E', CalculationMode.HEX.getMask()),
+    DIGIT_F('F', CalculationMode.HEX.getMask()),
+    DIGIT_0('0', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask() | CalculationMode.BIN.getMask()),
+    DIGIT_1('1', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask() | CalculationMode.BIN.getMask()),
+    DIGIT_2('2', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask()),
+    DIGIT_3('3', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask()),
+    DIGIT_4('4', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask()),
+    DIGIT_5('5', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask()),
+    DIGIT_6('6', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask()),
+    DIGIT_7('7', CalculationMode.HEX.getMask() | CalculationMode.OCT.getMask() |
+            CalculationMode.DEC.getMask()),
+    DIGIT_8('8', CalculationMode.HEX.getMask() | CalculationMode.DEC.getMask()),
+    DIGIT_9('9', CalculationMode.HEX.getMask() | CalculationMode.DEC.getMask());
 
     private final int calculationModesMask;
     private final char symbol;
@@ -33,7 +39,7 @@ public enum Digit {
     }
 
     public boolean isModeSupported(CalculationMode mode) {
-        int checkedMask = mode.getCalculationModeMask();
+        int checkedMask = mode.getMask();
         return (calculationModesMask & checkedMask) == checkedMask;
     }
 

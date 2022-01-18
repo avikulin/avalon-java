@@ -1,4 +1,4 @@
-package interfaces.logging;
+package interfaces;
 
 public interface DiagnosticLogger {
     void logError(Class<?> source, String... eventData);
