@@ -3,7 +3,6 @@ package utils;
 import dto.FieldTypeDescriptor;
 import interfaces.metadata.ColumnMetadata;
 import interfaces.metadata.FieldMetadataFabric;
-import org.apache.derby.client.am.DateTime;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -47,8 +46,8 @@ public class JdbcTypeFabric implements FieldMetadataFabric {
         typesMap.put(Types.DATE, Date.class);
         typesMap.put(Types.TIME, Time.class);
         typesMap.put(Types.TIME_WITH_TIMEZONE, Time.class);
-        typesMap.put(Types.TIMESTAMP, DateTime.class);
-        typesMap.put(Types.TIMESTAMP_WITH_TIMEZONE, DateTime.class);
+        typesMap.put(Types.TIMESTAMP, Date.class);
+        typesMap.put(Types.TIMESTAMP_WITH_TIMEZONE, Date.class);
         typesMap.put(Types.DECIMAL, BigDecimal.class);
         typesMap.put(Types.NUMERIC, BigDecimal.class);
         typesMap.put(Types.DOUBLE, double.class);

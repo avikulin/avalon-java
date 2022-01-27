@@ -48,7 +48,6 @@ public class DbContext implements DbConnection {
     public void connectTo(String s) throws IllegalStateException {
         try {
             connection = DriverManager.getConnection(s);
-
         } catch (SQLException exception) {
             Tracer.get().logError(this.getClass(), exception,
                     "There are troubles in connection to database: ".concat(s));
