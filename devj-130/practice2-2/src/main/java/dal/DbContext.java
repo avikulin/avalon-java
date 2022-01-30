@@ -108,12 +108,13 @@ public class DbContext implements DbConnection {
 
     @Override
     public void setCurrentTable(String tableName) {
-        String sqlQuery = String.format("select * from %s offset ? rows fetch first %d rows only",
+        String sqlDataQuery = String.format("select * from \"%s\" offset ? rows fetch first %d rows only",
                                         tableName, PAGE_SIZE);
+        String sqlCountQuery = String.format("select count(*) from \"%s\"", tableName);
         try (Statement stmt = getConnection().createStatement()) {
-            ResultSet data = stmt.executeQuery(String.format("select count(*) from %s", tableName));
+            ResultSet data = stmt.executeQuery(sqlCountQuery);
             data.next();
-            preparedStatement = getConnection().prepareStatement(sqlQuery);
+            preparedStatement = getConnection().prepareStatement(sqlDataQuery);
             this.tableName = tableName;
             this.numberOfColumns = preparedStatement.getMetaData().getColumnCount();
             this.numberOfRows = data.getInt(1);
@@ -124,7 +125,7 @@ public class DbContext implements DbConnection {
         }
 
         Tracer.get().logInfo(this.getClass(), "Current table has been set: ".concat(tableName));
-        Tracer.get().logInfo(this.getClass(), "SQL query has been prepared: ".concat(sqlQuery));
+        Tracer.get().logInfo(this.getClass(), "SQL query has been prepared: ".concat(sqlDataQuery));
     }
 
     @Override
