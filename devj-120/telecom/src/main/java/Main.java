@@ -1,5 +1,3 @@
-package ru.avalon.javapp.devj120.avalontelecom;
-
 import ru.avalon.javapp.devj120.avalontelecom.ui.MainFrame;
 
 /**

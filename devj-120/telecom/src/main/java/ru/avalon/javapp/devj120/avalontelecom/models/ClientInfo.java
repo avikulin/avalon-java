@@ -6,12 +6,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.MIN_YEAR_ALLOWED;
-
 /**
  * Keeps information about a company client.
  */
 public class ClientInfo implements Serializable {
+    public static final int MIN_YEAR_ALLOWED = 1920;
+
     private ClientType type;
     /**
      * Phone number.

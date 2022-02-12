@@ -1,5 +1,9 @@
 package ru.avalon.javapp.devj120.avalontelecom.lists;
 
+import ru.avalon.javapp.devj120.avalontelecom.models.ClientInfo;
+import ru.avalon.javapp.devj120.avalontelecom.models.PhoneNumber;
+
+import javax.management.OperationsException;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,17 +11,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ru.avalon.javapp.devj120.avalontelecom.models.ClientInfo;
-import ru.avalon.javapp.devj120.avalontelecom.models.PhoneNumber;
-
-import javax.management.OperationsException;
-
-import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.DATA_FILE_NAME;
-
 /**
  * Manages list of clients.
  */
 public class ClientList {
+    private static final String DATA_FILE_NAME = "clients.dat";
     /**
      * The only instance of this class.
      *

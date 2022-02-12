@@ -1,31 +1,25 @@
 package ru.avalon.javapp.devj120.avalontelecom.ui;
 
+import ru.avalon.javapp.devj120.avalontelecom.enums.ClientType;
+import ru.avalon.javapp.devj120.avalontelecom.enums.OperationType;
+import ru.avalon.javapp.devj120.avalontelecom.interfaces.ClientTypeDependable;
+import ru.avalon.javapp.devj120.avalontelecom.models.ClientInfo;
+import ru.avalon.javapp.devj120.avalontelecom.ui.components.visual.JFormField;
+import ru.avalon.javapp.devj120.avalontelecom.ui.components.visual.JPhoneNumberField;
+
+import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.zip.DataFormatException;
-
-import javax.swing.*;
-import javax.swing.text.MaskFormatter;
-
-import ru.avalon.javapp.devj120.avalontelecom.enums.ClientType;
-import ru.avalon.javapp.devj120.avalontelecom.enums.OperationType;
-import ru.avalon.javapp.devj120.avalontelecom.interfaces.ClientTypeDependable;
-import ru.avalon.javapp.devj120.avalontelecom.models.ClientInfo;
-import ru.avalon.javapp.devj120.avalontelecom.ui.components.JFormField;
-import ru.avalon.javapp.devj120.avalontelecom.ui.components.JPhoneNumberField;
 
 import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.DATE_STR_FORMAT;
-import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.MIN_YEAR_ALLOWED;
 
 /**
  * Dialog window for client attributes entering/editing.
@@ -40,23 +34,24 @@ public class ClientDialog extends JDialog {
 	private final JTextField managerNameField;
 	private final JTextField contactPersonNameField;
 	private final JTextField registrationDateField;
-	
+
 	/**
-	 * Set to {@code true}, when a user closes the dialog with "OK" button. 
+	 * Set to {@code true}, when a user closes the dialog with "OK" button.
 	 * This field value is returned by {@link #showModal} method.
 	 */
 	private boolean okPressed;
 
-	private OperationType operationType;
+	private final OperationType operationType;
 
 	/**
 	 * Constructs the dialog.
-	 * 
+	 *
 	 * @param owner dialog window parent container
 	 */
-	private ClientDialog(JFrame owner, OperationType operationType){
+	private ClientDialog(JFrame owner, OperationType operationType) {
 		super(owner, true);
 		this.operationType = operationType;
+
 		cbClientType = new JComboBox<>(
 				new ClientType[] {
 						ClientType.PERSON,
@@ -83,10 +78,11 @@ public class ClientDialog extends JDialog {
 			e.printStackTrace();
 		}
 
-		mask.setPlaceholderCharacter('_');
+		if (mask != null) {
+			mask.setPlaceholderCharacter('_');
+		}
+
 		birthDateField = new JFormattedTextField(mask);
-
-
 		birthDateField.setColumns(10);
 
 		managerNameField = new JTextField(30);
@@ -97,13 +93,13 @@ public class ClientDialog extends JDialog {
 
 		initLayout();
 		setResizable(false);
-
+		setDialogMode(ClientType.PERSON);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				super.windowOpened(e);
 				ClientDialog dlg = (ClientDialog) e.getWindow();
-				if (dlg.getDialogOperation() == OperationType.CREATE){
+				if (dlg.getDialogOperation() == OperationType.CREATE) {
 					dlg.cbClientType.setPopupVisible(true);
 				}
 			}
@@ -209,7 +205,6 @@ public class ClientDialog extends JDialog {
 		controlsPane.add(p);
 
 		if (operationType == OperationType.CREATE){
-			//cbClientType.setPopupVisible(true);
 			cbClientType.requestFocus();
 		} else {
 			clientNameField.requestFocusInWindow();
@@ -288,6 +283,9 @@ public class ClientDialog extends JDialog {
 	 * Returns value of area code entered by a user.
 	 */
 	public String getAreaCode() {
+		if (phoneNumberField.getAreaCode().isEmpty()) {
+			throw new IllegalStateException("Area code can't be blank");
+		}
 		return phoneNumberField.getAreaCode();
 	}
 	
@@ -295,6 +293,9 @@ public class ClientDialog extends JDialog {
 	 * Returns value of phone local number entered by a user.
 	 */
 	public String getPhoneNum() {
+		if (phoneNumberField.getPhoneNumber().isEmpty()) {
+			throw new IllegalStateException("Phone number can't be blank");
+		}
 		return phoneNumberField.getPhoneNumber();
 	}
 	
@@ -302,6 +303,9 @@ public class ClientDialog extends JDialog {
 	 * Returns value of client name entered by a user.
 	 */
 	public String getClientName() {
+		if (clientNameField.getText().isEmpty()) {
+			throw new IllegalStateException("Client's name can't be blank");
+		}
 		return clientNameField.getText();
 	}
 	
@@ -309,6 +313,10 @@ public class ClientDialog extends JDialog {
 	 * Returns value of client address entered by a user.
 	 */
 	public String getClientAddr() {
+		if (clientAddrField.getText().isEmpty()) {
+			throw new IllegalStateException("Client's address can't be blank");
+		}
+
 		return clientAddrField.getText();
 	}
 
@@ -317,21 +325,40 @@ public class ClientDialog extends JDialog {
 	}
 
 	public LocalDate getBirthDate() {
+		if (getClientType() == ClientType.COMPANY) {
+			return null;
+		}
+
 		try {
 			String strDate = birthDateField.getText();
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DATE_STR_FORMAT);
 			LocalDate date = LocalDate.parse(strDate, dateFormat);
 			return date;
-		}catch (DateTimeParseException exception){
+		} catch (DateTimeParseException exception) {
 			throw new IllegalStateException("Incorrect date of birth value");
 		}
 	}
 
 	public String getManagerName() {
+		if (getClientType() == ClientType.PERSON) {
+			return null;
+		}
+
+		if (managerNameField.getText().isEmpty()) {
+			throw new IllegalStateException("Manager's name can't be blank");
+		}
 		return managerNameField.getText();
 	}
 
 	public String getContactPersonName() {
+		if (getClientType() == ClientType.PERSON) {
+			return null;
+		}
+
+		if (contactPersonNameField.getText().isEmpty()) {
+			throw new IllegalStateException("Contact person's name can't be blank");
+		}
+
 		return contactPersonNameField.getText();
 	}
 }

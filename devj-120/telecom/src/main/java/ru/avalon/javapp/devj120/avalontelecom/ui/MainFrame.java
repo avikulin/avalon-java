@@ -12,16 +12,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 
-import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.MOUSE_DBL_CLICK;
-
 /**
  * Application main window.
  */
 public class MainFrame extends JFrame {
+    public static final int MOUSE_DBL_CLICK = 2;
+
     private final ClientListTableModel clientsTableModel = new ClientListTableModel();
     private final JTable clientsTable = new JTable();
-
-    private ClientDialog clientDialog;
 
     public MainFrame() {
         super("AvalonTelecom Ltd. clients list");

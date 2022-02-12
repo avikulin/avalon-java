@@ -1,11 +1,8 @@
 package ru.avalon.javapp.devj120.avalontelecom.enums;
 
-import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.MASK_COMPANY;
-import static ru.avalon.javapp.devj120.avalontelecom.constants.Constants.MASK_PERSON;
-
 public enum ClientType {
-    PERSON("Individual person", MASK_PERSON),
-    COMPANY("Company", MASK_COMPANY);
+    PERSON("Individual person", 0b01),
+    COMPANY("Company", 0b10);
 
     private final String typeName;
     private final int mask;
