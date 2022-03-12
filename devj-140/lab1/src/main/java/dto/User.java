@@ -11,7 +11,7 @@ public class User {
     private final String name;
     private final String password;
 
-    private static final String PROPERTY_USER = "user";
+    private static final String PROPERTY_USER = "login";
     private static final String PROPERTY_PASSWORD = "password";
 
     public User(String name, String password) throws IOException, UserException {
@@ -29,8 +29,10 @@ public class User {
         }
 
         PropertiesRepo props = AppProperties.getInstance();
-        if (!name.equals(props.getValue(PROPERTY_USER))||
-                !password.equals(props.getValue(PROPERTY_PASSWORD))){
+        String ethalonUser = props.getValue(PROPERTY_USER);
+        String ethalonPwd = props.getValue(PROPERTY_PASSWORD);
+
+        if (!name.equals(ethalonUser)||!password.equals(ethalonPwd)){
             throw new UserException("Login or password are incorrect");
         }
     }

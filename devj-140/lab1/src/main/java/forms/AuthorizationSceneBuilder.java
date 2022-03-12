@@ -10,10 +10,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class AuthorizationSceneBuilder implements SceneBuilder {
+    private Stage primary;
+
+    public AuthorizationSceneBuilder(Stage primary) {
+        if (primary == null){
+            throw new IllegalArgumentException("Primary stage must be set");
+        }
+
+        this.primary = primary;
+    }
+
     @Override
     public Scene build() {
         GridPane mainBoard = new GridPane();
@@ -36,6 +47,7 @@ public class AuthorizationSceneBuilder implements SceneBuilder {
         bodyConstraint.setPercentWidth(80.0);
         bodyConstraint.setHgrow(Priority.ALWAYS);
         bodyConstraint.setFillWidth(true);
+        
         mainBoard.getColumnConstraints().add(leftMarginConstraint);
         mainBoard.getColumnConstraints().add(bodyConstraint);
         mainBoard.getColumnConstraints().add(leftMarginConstraint);
@@ -44,7 +56,7 @@ public class AuthorizationSceneBuilder implements SceneBuilder {
 
         HBox paneTitle = new HBox();
         paneTitle.setAlignment(Pos.BOTTOM_CENTER);
-        //paneTitle.setMinHeight(120);
+
         Label labelTop = new Label("Authorization");
         labelTop.getStyleClass().add("welcome-title");
         paneTitle.getChildren().add(labelTop);
@@ -95,7 +107,9 @@ public class AuthorizationSceneBuilder implements SceneBuilder {
             String pass = pasField.getText();
             try {
                 UserSessionController.getInstance().createSession(name, pass);
+
                 lbErrorMsg.setText("Loading...");
+                this.primary.setScene(new MainSceneBuilder(this.primary).build());
             } catch (UserException | IOException ex) {
                 lbErrorMsg.setText(ex.getMessage());
             }

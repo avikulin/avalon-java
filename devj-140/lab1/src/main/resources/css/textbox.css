@@ -1,0 +1,23 @@
+#search-box{
+    -fx-min-height: 35;
+    -fx-border-style: hidden;
+    -fx-background-color: inherit;
+    -fx-border-insets: 5;
+}
+
+#search-pane{
+    -fx-min-height: 35;
+    -fx-padding: 5  5  5  5;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: #7ebcea;
+    -fx-border-color: #263e75;
+}
+
+#top-placeholder{
+    -fx-padding: 15 15 15 15;
+}
+
+.action-placeholder{
+    -fx-padding: 5 5 5 5;
+}
